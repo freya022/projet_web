@@ -24,4 +24,8 @@ async function test() {
     let stocks = await stock.findAll();
 }
 
-test();
+test().then(value => {
+    console.log("OK");
+}).catch(reason => {
+    console.log(reason);
+});
