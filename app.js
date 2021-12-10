@@ -6,7 +6,9 @@ const app = express();
 
 const {sequelize} = require('./BDD.js');
 
-const {reapprovisionnement} = require('./bdd/Reapprovisionnement');
-const {magasin} = require('./bdd/Magasin')
 const {articles} = require('./bdd/Article')
-const {stock} = require('./bdd/stock')
+const {livraison} = require('./bdd/Livraison')
+const {magasin} = require('./bdd/Magasin')
+const {reapprovisionnement} = require('./bdd/Reapprovisionnement');
+const {reparation} = require('./bdd/Reparation')
+const {stock} = require('./bdd/Stock')

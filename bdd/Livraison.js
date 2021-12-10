@@ -8,19 +8,16 @@ const livraison = sequelize.define('livraison', {
         allowNull: false
     },
 
-
-    dateLivraisonPrevu:{
+    dateLivraisonPrevu: {
         type: DataTypes.DATE,
     },
 
-    dateArrive:{
+    dateArrive: {
         type: DataTypes.DATE,
-    },
-
-    },{
-    tableName: 'magasin',
+    }
+}, {
+    tableName: 'livraison',
     timestamps: false
-
 });
 
 module.exports = {
