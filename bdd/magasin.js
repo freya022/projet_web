@@ -8,11 +8,9 @@ const magasin = sequelize.define('magasin', {
         allowNull: false
     },
 
-    nomMagasin:{
+    nomMagasin: {
         type: DataTypes.STRING
     },
-
-
 
     email: {
         type: DataTypes.STRING,
@@ -33,11 +31,9 @@ const magasin = sequelize.define('magasin', {
         allowNull: false
     },
 
-    rue:{
+    rue: {
         type: DataTypes.STRING,
-    },
-
-
+    }
 }, {
     tableName: 'magasin',
     timestamps: false
