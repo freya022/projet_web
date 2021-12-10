@@ -5,14 +5,11 @@ const stock = sequelize.define('Stock', {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    nom: DataTypes.TEXT,
-    description: DataTypes.TEXT,
-    prix: DataTypes.NUMERIC,
-    typeVelo: DataTypes.TEXT,
     quantiteDispo: DataTypes.INTEGER,
     quantiteMin: DataTypes.INTEGER
 }, {
-    tableName: 'Stock'
+    tableName: 'Stock',
+    timestamps: false
 });
 
 module.exports = {
