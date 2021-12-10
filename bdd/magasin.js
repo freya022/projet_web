@@ -1,49 +1,36 @@
-const { Sequelize,DataTypes } = require("sequelize");
+const {sequelize, DataTypes} = require('./../BDD.js');
 
-const sequelize = new Sequelize('', '', '', {
-    host: '',
-    port: 2222,
-    dialect: 'sql'
-});
-
-try{
-    sequelize.authenticate();
-    console.log("Vous etes Connecté");
-}catch(error){
-    console.log(error)
-}
-
-sequelize.define('magasin', {
-
-    idMagasin:{
+const magasin = sequelize.define('magasin', {
+    idMagasin: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey:true,
+        primaryKey: true,
         allowNull: false
-
     },
+
     ville: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    reparation:{
+    reparation: {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
 
-    email:{
+    email: {
         type: DataTypes.STRING,
 
     },
 
-    telephone:{
-      type: DataTypes.STRING,
+    telephone: {
+        type: DataTypes.STRING,
     },
-},
-
-    {
+}, {
     tableName: 'magasin',
-    timestamps: false,
-    synchronize: true,
+    timestamps: false
 });
+
+module.exports = {
+    magasin
+}
