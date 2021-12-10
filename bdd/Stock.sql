@@ -10,4 +10,3 @@ CREATE TABLE StockArticle
     quantiteDispo int            not null,
     quantiteMin   int
 );
-
