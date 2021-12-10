@@ -1,13 +1,11 @@
 const {sequelize, DataTypes} = require('./../BDD.js')
 
-const reparation = sequelize.define(
-    "Reparation",
-    {
+const reparation = sequelize.define("Reparation", {
         idReparation: {type: DataTypes.INTEGER, primaryKey: true},
-        articleReparation: {type: DataTypes.TEXT, references: {model: 'Articles', key: 'nom_article'}},
-        magasinReparation: {type: DataTypes.TEXT, references: {model: 'magasin', key: 'nomMagasin'}},
+        idArticle: {type: DataTypes.INTEGER, references: {model: 'Article', key: 'idArticle'}},
+        idMagasin: {type: DataTypes.INTEGER, references: {model: 'Magasin', key: 'idMagasin'}},
         prix: DataTypes.FLOAT,
-        tempsReparation: DataTypes.TEXT,
+        tempsReparation: DataTypes.TEXT
     },
     {
         tableName: "Reparation",

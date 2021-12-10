@@ -3,10 +3,12 @@ const {sequelize, DataTypes} = require('./../BDD.js')
 const article = sequelize.define(
     "Article",
     {
-        id: {type: DataTypes.INTEGER, primaryKey: true},
-        nomArticles: DataTypes.TEXT, //nom pour savoir si c'est une pièce ou un vélo
+        idArticle: {type: DataTypes.INTEGER, primaryKey: true},
+        nomArticle: DataTypes.TEXT,
+        categorie: DataTypes.TEXT,
         description: DataTypes.TEXT,
-        prix: DataTypes.FLOAT
+        lienImage: DataTypes.TEXT,
+        prix: DataTypes.FLOAT,
     },
     {
         tableName: "article",

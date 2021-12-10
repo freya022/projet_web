@@ -1,9 +1,7 @@
-DROP TABLE IF EXISTS StockArticle CASCADE;
-
 CREATE TABLE StockArticle
 (
-    idArticle     serial primary key,
-    prix          numeric(10, 2) not null,
-    quantiteDispo int            not null,
-    quantiteMin   int
+    "idArticle"     serial primary key,
+    "prix"          numeric(10, 2) not null,
+    "quantiteDispo" int            not null,
+    "quantiteMin"   int
 );
