@@ -6,6 +6,4 @@ const {Sequelize, DataTypes} = require("sequelize");
 
 const app = express();
 
-const readConfig = require('read-config');
-const config = readConfig('config.json');
-
+const {sequelize} = require('./BDD.js');
