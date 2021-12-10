@@ -17,4 +17,12 @@ const livraison = sequelize.define('livraison', {
         type: DataTypes.DATE,
     },
 
+    },{
+    tableName: 'magasin',
+    timestamps: false
+
 });
+
+module.exports = {
+    livraison
+}
