@@ -1,0 +1,7 @@
+Création d'un site WEB :
+
+- Theme : Vélo (caractéristiques, prix, propositions de ventes/réparations...)
+- Vente de pièces détachées
+- Pages (Accueil, Info produit, Vente, Réparation, FAQ...)
+- Localisation du magasin le plus proche
+- Livraison (gestion de stock, entrée info livraison)
