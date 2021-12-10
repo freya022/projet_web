@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS Articles;
+DROP TABLE IF EXISTS Article;
 
-CREATE TABLE Articles
+CREATE TABLE Article
 (
     idArticle int primary key,
     nom_article text not null,
