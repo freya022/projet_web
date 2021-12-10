@@ -8,15 +8,11 @@ const magasin = sequelize.define('magasin', {
         allowNull: false
     },
 
-    ville: {
-        type: DataTypes.STRING,
-        allowNull: false
+    nomMagasin:{
+        type: DataTypes.STRING
     },
 
-    reparation: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
+
 
     email: {
         type: DataTypes.STRING,
@@ -26,6 +22,22 @@ const magasin = sequelize.define('magasin', {
     telephone: {
         type: DataTypes.STRING,
     },
+
+    reparation: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+
+    ville: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
+    rue:{
+        type: DataTypes.STRING,
+    },
+
+
 }, {
     tableName: 'magasin',
     timestamps: false
