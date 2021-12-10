@@ -6,5 +6,5 @@ CREATE TABLE Reparation
     articleReparation text references Article (nomArticle),
     magasinReparation text references magasin (nomMagasin),
     prix              numeric(10, 2) not null,
-    temps_reparation  text           not null
+    tempsReparation   text           not null
 );
