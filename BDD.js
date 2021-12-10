@@ -1,5 +1,5 @@
 const config = require('./Config.js')
-const {Sequelize} = require("sequelize");
+const {Sequelize, DataTypes} = require("sequelize");
 
 const sequelize = new Sequelize(config.databaseName, config.user, config.password, {
     port: config.port,
@@ -8,5 +8,6 @@ const sequelize = new Sequelize(config.databaseName, config.user, config.passwor
 });
 
 module.exports = {
-    sequelize
+    sequelize,
+    DataTypes
 }
