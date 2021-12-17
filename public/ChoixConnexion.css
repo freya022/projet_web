@@ -2,7 +2,20 @@ h1{
     text-align: center;
 }
 
+body{
+    padding-top:100px;
+    font-style: italic;
+    background: #ff5f6d;
+    background: -webkit-linear-gradient(to right, #ff5f6d, #ffc371);
+    background: linear-gradient(to right, #ff5f6d, #ffc371);
+    min-height: 100vh;
 
+}
+
+footer ul{
+    float: right;
+    padding-right: 50px;
+}
 
 html{
     background-color: gray;
@@ -17,7 +30,7 @@ html{
 
 .ulFooter {
     list-style: none;
-    padding-top: 40px;
+    padding-top: 180px;
 }
 
 li{
