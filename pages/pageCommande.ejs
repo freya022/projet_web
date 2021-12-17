@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Commande</title>
+</head>
+<body>
+
+<!-- En-tête de la page avec le menu de navigation -->
+<header>
+    <h1>Commande</h1>
+    <nav>
+        <ul>
+            <li><a href="accueil.ejs">Accueil</a></li>
+            <li><a href="catalogue.ejs">Catalogue</a></li>
+            <li><a href="suiviLivraison.ejs">Suivi de livraison</a></li>
+            <li><a href="reparation.ejs">Réparation</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<!-- partie principale de la page, sert à visualiser la commande -->
+<main>
+    <h2>Récapitulatif de votre commande : </h2>
+
+    <table>
+        <tr>
+            <th>numéro commande</th>
+            <th>nom de l'article</th>
+            <th>prix</th>
+        </tr>
+    <% commandes.forEach((commandes) => { %>
+        <tr>
+            <td><%= commandes.idCommande %></td>
+            <td><%= commandes.nomArticle() %><td>
+            <td><%= commandes.prix %></td>
+        </tr>
+    <% }); %>
+    </table>
+
+    <form action="" method="post">
+        <input type="submit" value="Valider Commande">
+    </form>
+</main>
+
+
+<!-- Bas de la page avec d'autres informations -->
+<footer>
+
+</footer>
+
+</body>
+</html>
+

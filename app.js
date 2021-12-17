@@ -23,6 +23,7 @@ const {magasin} = require('./bdd/Magasin')
 const {reapprovisionnement} = require('./bdd/Reapprovisionnement');
 const {reparation} = require('./bdd/Reparation')
 const {stock} = require('./bdd/Stock')
+const {commande} = require("./bdd/Commande");
 
 async function test() {
     let articles = await article.findAll();
@@ -67,6 +68,17 @@ app.get("/inscription", async (req, res) => {
         res.render("Inscription");
     }
 });
+
+app.get("/commande", async (req, res) => {
+    //Si on n'est pas connecté, afficher la page d'inscription
+    //Sinon rediriger vers le catalogue
+    if (await isLogon(req)) {
+        res.render("commandes", {commandes: commande});
+    } else {
+        res.render("Login");
+    }
+});
+
 
 //Le formulaire de connexion redirige ici
 app.post("/try-login", async (req, res) => {
