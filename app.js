@@ -160,7 +160,7 @@ async function getClientConnecte(req) {
 
 //Vérifie que l'utilisateur est connecté
 async function isLogon(req) {
-    return await getClientConnecte() != null;
+    return await getClientConnecte(req) != null;
 }
 
 app.get("/catalogue", async (req, res) => {
@@ -168,6 +168,16 @@ app.get("/catalogue", async (req, res) => {
         res.status(200); //Le client est déjà connecté
         res.contentType("text/plain");
         res.end("Catalogue"); //TODO utiliser render() pour la page EJS
+    } else {
+        res.redirect("login"); //Demande au client de se connecter
+    }
+});
+
+app.get("/accueil", async (req, res) => {
+    if (await isLogon(req)) {
+        let magasins = await magasin.findAll();
+
+        res.render("accueil",{ magasins: magasins });
     } else {
         res.redirect("login"); //Demande au client de se connecter
     }
