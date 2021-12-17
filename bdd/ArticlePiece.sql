@@ -1,4 +1,4 @@
 CREATE TABLE ArticlePiece
 (
-    idArticle serial not null references Article
+    idArticle serial primary key references Article
 );

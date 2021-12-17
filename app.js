@@ -17,7 +17,11 @@ app.use('/public', express.static('public'));
 const {sequelize} = require('./BDD.js');
 
 const {article} = require('./bdd/Article')
+const {articlePiece} = require('./bdd/ArticlePiece')
+const {articleVelo} = require('./bdd/ArticleVelo')
 const {client} = require('./bdd/Client')
+const {commande} = require('./bdd/Commande')
+const {ligneCommande} = require('./bdd/LigneCommande')
 const {livraison} = require('./bdd/Livraison')
 const {magasin} = require('./bdd/Magasin')
 const {reapprovisionnement} = require('./bdd/Reapprovisionnement');
@@ -27,7 +31,11 @@ const {commande} = require("./bdd/Commande");
 
 async function test() {
     let articles = await article.findAll();
+    let articlePieces = await articlePiece.findAll();
+    let articleVelos = await articleVelo.findAll();
     let clients = await client.findAll();
+    let commandes = await commande.findAll();
+    let ligneCommandes = await ligneCommande.findAll();
     let livraisons = await livraison.findAll();
     let magasins = await magasin.findAll();
     let reapprovisionnements = await reapprovisionnement.findAll();
@@ -42,11 +50,7 @@ test().then(value => {
 });
 
 app.get("/", async (req, res) => {
-    res.status(200);
-    res.contentType("text/plain");
-    res.end("Accueil");  //TODO utiliser render() pour la page EJS
-
-    //TODO présenter un bouton login / inscription
+    res.render("ChoixConnexion");
 });
 
 app.get("/login", async (req, res) => {

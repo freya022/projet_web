@@ -1,9 +1,9 @@
 const {sequelize, DataTypes} = require('./../BDD.js')
 
-const article = sequelize.define(
+const articlePiece = sequelize.define(
     "ArticlePiece",
     {
-        idArticle: {type: DataTypes.INTEGER} //TODO ajouter attributs
+        idArticle: {type: DataTypes.INTEGER, primaryKey: true} //TODO ajouter attributs
     },
     {
         tableName: "articlepiece",
@@ -12,5 +12,5 @@ const article = sequelize.define(
 );
 
 module.exports = {
-    article
+    articlePiece
 }
