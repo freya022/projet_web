@@ -2,9 +2,9 @@ const {sequelize, DataTypes} = require('./../BDD.js')
 
 const commande = sequelize.define("Commande", {
         idCommande: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
-        idClient: DataTypes.INTEGER
-    },
-    {
+        idClient: DataTypes.INTEGER,
+        fini: DataTypes.BOOLEAN
+    }, {
         tableName: "Commande",
         timestamps: false
     }

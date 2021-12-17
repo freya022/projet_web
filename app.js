@@ -124,7 +124,7 @@ app.post("/try-inscription", async (req, res) => {
     });
 
     if (clientTrouve != null) {
-       res.redirect("/inscription");
+        res.redirect("/inscription");
     } else {
         await client.create({
             nom: nom,
@@ -173,9 +173,68 @@ app.get("/accueil", async (req, res) => {
     if (await isLogon(req)) {
         let magasins = await magasin.findAll();
 
-        res.render("accueil",{ magasins: magasins });
+        res.render("accueil", {magasins: magasins});
     } else {
         res.redirect("login"); //Demande au client de se connecter
+    }
+});
+
+//API
+app.get("/mettre-au-panier", async (req, res) => {
+    if (await isLogon(req)) {
+        if (req.body.idArticle === undefined) {
+            res.status(400);
+            res.end();
+
+            return;
+        }
+
+        res.status(200);
+
+        let clientConnecte = getClientConnecte(req);
+        let commandeEnCours = await commande.findOne({
+            where: {
+                idClient: clientConnecte.idClient,
+                fini: false
+            }
+        });
+
+        if (commandeEnCours === null) {
+            commandeEnCours = await commande.create({
+                idClient: clientConnecte.idClient
+            });
+        }
+
+        let idArticle = req.header("idArticle");
+
+        let ligneEnCours = await commande.findOne({
+            where: {
+                idCommande: commandeEnCours.idCommande,
+                idArticle: idArticle
+            }
+        });
+
+        if (ligneEnCours === null) {
+            await ligneCommande.create({
+                idCommande: commandeEnCours.idCommande,
+                idArticle: idArticle,
+                quantite: 1
+            });
+        } else {
+            await ligneCommande.update({
+                quantite: ligneEnCours.quantite + 1
+            }, {
+                where: {
+                    idCommande: commandeEnCours.idCommande,
+                    idArticle: idArticle
+                }
+            });
+        }
+
+        res.end();
+    } else {
+        res.status(403);
+        res.end();
     }
 });
 
