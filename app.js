@@ -73,7 +73,7 @@ app.get("/commande", async (req, res) => {
     //Si on n'est pas connecté, afficher la page d'inscription
     //Sinon rediriger vers le catalogue
     if (await isLogon(req)) {
-        res.render("commandes", {commandes: commande});
+        res.render("pageCommande", {commandes: commande});
     } else {
         res.render("Login");
     }
@@ -172,16 +172,6 @@ app.get("/catalogue", async (req, res) => {
         res.redirect("login"); //Demande au client de se connecter
     }
 });
-
-app.get("/Commande", async (req, res) => {
-    if (await isLogon(req)) {
-        res.status(200);
-        res.contentType("text/plain");
-        res.end("Commande");
-    } else {
-        res.redirect("login");
-    }
-})
 
 app.get("/accueil", async (req, res) => {
     if (await isLogon(req)) {

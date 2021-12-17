@@ -25,18 +25,18 @@
 
 <!-- partie principale de la page, sert à visualiser la commande -->
 <main>
-    <h2>Récapitulatif de votre commande : </h2>
+    <h2>Récapitulatif de votre commande numéro : <%= commandes.idCommande %> </h2>
 
     <table>
         <tr>
-            <th>numéro commande</th>
             <th>nom de l'article</th>
+            <th>quantité</th>
             <th>prix</th>
         </tr>
     <% commandes.forEach((commandes) => { %>
         <tr>
-            <td><%= commandes.idCommande %></td>
             <td><%= commandes.nomArticle %><td>
+            <td><%= commandes.quantite %></td>
             <td><%= commandes.prix %></td>
         </tr>
     <% }); %>
