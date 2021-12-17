@@ -43,7 +43,8 @@ test().then(value => {
 app.get("/", async (req, res) => {
     res.status(200);
     res.contentType("text/plain");
-    res.end("Accueil");  //TODO utiliser render() pour la page EJS
+    res.end("ChoixConnexion");  //TODO utiliser render() pour la page EJS
+    res.render("ChoixConnexion");
 
     //TODO présenter un bouton login / inscription
 });
