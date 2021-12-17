@@ -5,3 +5,4 @@ CREATE TABLE ArticleVelo
     tailleVelo text not null ,
     poidsVelo float not null
 );
+
