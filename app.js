@@ -149,11 +149,11 @@ async function isLogon(req) {
 
 app.get("/catalogue", async (req, res) => {
     if (await isLogon(req)) {
-        res.status(200);
+        res.status(200); //Le client est déjà connecté
         res.contentType("text/plain");
         res.end("Catalogue"); //TODO utiliser render() pour la page EJS
     } else {
-        res.redirect("login")
+        res.redirect("login"); //Demande au client de se connecter
     }
 });
 
