@@ -1,0 +1,49 @@
+<link href="Accueil.css" rel="stylesheet">
+<title>Accueil</title>
+
+    <header>
+
+        <nav class="navBar">
+            <ul>
+                <li><a href="">Accueil</a></li>
+                <li><a href="">Catalogue</a></li>
+                <li><a href="">Suivi de Livraison</a></li>
+                <li><a href="">Réparation</a></li>
+                <li><a href="">Vos Magasin</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <h1> Magasin à proximité</h1>
+
+<% magasins.forEach((magasin) => { %>
+<tr>
+    <td><%= magasin.nomMagasin %></td>
+</tr>
+<% }); %>
+
+    <h1> Que proposons-nous</h1>
+        <ul>
+            <li>Réparation de vos Vélos</li>
+            <li>Catalogue d'équipement ou encore de vélos</li>
+            <li>Vos magasins d'équipement les plus proches</li>
+        </ul>
+
+
+
+
+
+    <footer>
+
+        Nos Coordonnées:
+
+        <ul>
+            <li> Mail : </li>
+            <li> Téléphone : </li>
+            <li> Adresse : </li>
+        </ul>
+    </footer>
+
+
+

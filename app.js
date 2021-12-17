@@ -161,6 +161,19 @@ app.get("/catalogue", async (req, res) => {
     }
 });
 
+app.get("/accueil", async (req, res) => {
+    if (await isLogon(req)) {
+        res.status(200); //Le client est déjà connecté
+        res.contentType("text/plain");
+        res.end("accueil"); //TODO utiliser render() pour la page EJS
+        res.render("accueil",{
+            magasin: magasins
+        });
+    } else {
+        res.redirect("login"); //Demande au client de se connecter
+    }
+});
+
 app.listen(8080, "localhost", () => {
     console.log("Server running");
 });
