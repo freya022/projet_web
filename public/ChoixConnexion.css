@@ -1,0 +1,46 @@
+h1{
+    text-align: center;
+}
+
+
+
+html{
+    background-color: gray;
+}
+
+.ulButton {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 880px;
+    padding-top: 150px;
+}
+
+.ulFooter {
+    list-style: none;
+    padding-top: 40px;
+}
+
+li{
+    margin-bottom:40px;
+}
+
+
+
+button{
+
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 50px;
+
+}
+
