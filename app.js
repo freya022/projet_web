@@ -130,23 +130,25 @@ app.post("/try-inscription", async (req, res) => {
     }
 });
 
-//Vérifie que l'utilisateur est connecté
-async function isLogon(req) {
+async function getClientConnecte(req) {
     if (req.cookies === undefined || req.cookies["nom"] === undefined || req.cookies["mdp"] === undefined) {
-        return false;
+        return null;
     }
 
     let nom = req.cookies["nom"]
     let mdp = req.cookies["mdp"]
 
-    let clientTrouve = await client.findOne({
+    return await client.findOne({
         where: {
             "nom": nom,
             "mdp": mdp
         }
     });
+}
 
-    return clientTrouve != null;
+//Vérifie que l'utilisateur est connecté
+async function isLogon(req) {
+    return await getClientConnecte() != null;
 }
 
 app.get("/catalogue", async (req, res) => {
