@@ -12,6 +12,8 @@ app.use(express.urlencoded({extended: true}));
 app.set("views", path.join(__dirname, "pages"));
 app.set("view engine", "ejs");
 
+app.use('/public', express.static('public'));
+
 const {sequelize} = require('./BDD.js');
 
 const {article} = require('./bdd/Article')
