@@ -9,7 +9,7 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "pages"));
 app.set("view engine", "ejs");
 
 const {sequelize} = require('./BDD.js');
@@ -45,13 +45,17 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/login", async (req, res) => {
-    res.status(200);
-    res.contentType("text/plain");
-    res.end("Login"); //TODO utiliser render() pour la page EJS
+    //Si on n'est pas connecté, afficher la page de connexion
+    //Sinon rediriger vers le catalogue
+    if (await isLogon(req)) {
+        res.redirect("/catalogue");
+    } else {
+        res.render("Login");
+    }
 });
 
 //Le formulaire redirige ici
-app.get("/try-login", async (req, res) => {
+app.post("/try-login", async (req, res) => {
     if (!req.body.hasOwnProperty("nom") || !req.body.hasOwnProperty("mdp")) {
         res.status(403)
         res.end()
@@ -70,11 +74,19 @@ app.get("/try-login", async (req, res) => {
     });
 
     if (clientTrouve != null) {
-        res.render("Catalogue"); //TODO utiliser render() pour la page EJS
+        res.cookie("nom", nom);
+        res.cookie("mdp", mdp);
+
+        res.redirect("/catalogue");
     }
 });
 
-async function checkLogin(req) {
+//Vérifie que l'utilisateur est connecté
+async function isLogon(req) {
+    if (!req.cookies.hasOwnProperty("nom") || !req.cookies.hasOwnProperty("mdp")) {
+        return false;
+    }
+
     let nom = req.cookies["nom"]
     let mdp = req.cookies["mdp"]
 
@@ -89,12 +101,12 @@ async function checkLogin(req) {
 }
 
 app.get("/catalogue", async (req, res) => {
-    if (await checkLogin(req)) {
+    if (await isLogon(req)) {
         res.status(200);
         res.contentType("text/plain");
         res.end("Catalogue"); //TODO utiliser render() pour la page EJS
     } else {
-        res.render("Login"); //TODO faire la page EJS
+        res.redirect("login")
     }
 });
 
