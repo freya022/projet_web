@@ -27,7 +27,6 @@ const {magasin} = require('./bdd/Magasin')
 const {reapprovisionnement} = require('./bdd/Reapprovisionnement');
 const {reparation} = require('./bdd/Reparation')
 const {stock} = require('./bdd/Stock')
-const {commande} = require("./bdd/Commande");
 
 async function test() {
     let articles = await article.findAll();
@@ -81,7 +80,7 @@ app.get("/commande", async (req, res) => {
 
         let commandeEnCours = await commande.findOne({
             where: {
-                idClient: clientConnecte.idClient;
+                idClient: clientConnecte.idClient
             }
         });
 
