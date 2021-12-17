@@ -76,7 +76,7 @@ app.get("/commande", async (req, res) => {
     //Si on n'est pas connecté, afficher la page d'inscription
     //Sinon rediriger vers le catalogue
     if (await isLogon(req)) {
-        let clientConnecte = getClientConnecte(req);
+        let clientConnecte = await getClientConnecte(req);
 
         let commandeEnCours = await commande.findOne({
             where: {
@@ -84,12 +84,15 @@ app.get("/commande", async (req, res) => {
             }
         });
 
-        //TODO si il n'y a pas de commande
+        if (commandeEnCours === null) {
+            commandeEnCours = await commande.create({
+                idClient: clientConnecte.idClient
+            });
+        }
 
-        let lignesEnCours = await ligneCommande.findAll({
-            where: {
-                idCommande: commandeEnCours.idCommande
-            }
+        // language=PostgreSQL
+        let lignesEnCours = await sequelize.query(`select * from ligneCommande join article using(idArticle) where idCommande = ${commandeEnCours.idCommande}`, {
+            type: sequelize.QueryTypes.SELECT
         });
 
         res.render("pageCommande", {
