@@ -72,6 +72,39 @@ app.get("/inscription", async (req, res) => {
     }
 });
 
+app.get("/commande", async (req, res) => {
+    //Si on n'est pas connecté, afficher la page d'inscription
+    //Sinon rediriger vers le catalogue
+    if (await isLogon(req)) {
+        let clientConnecte = await getClientConnecte(req);
+
+        let commandeEnCours = await commande.findOne({
+            where: {
+                idClient: clientConnecte.idClient
+            }
+        });
+
+        if (commandeEnCours === null) {
+            commandeEnCours = await commande.create({
+                idClient: clientConnecte.idClient
+            });
+        }
+
+        // language=PostgreSQL
+        let lignesEnCours = await sequelize.query(`select * from ligneCommande join article using(idArticle) where idCommande = ${commandeEnCours.idCommande}`, {
+            type: sequelize.QueryTypes.SELECT
+        });
+
+        res.render("pageCommande", {
+            commande: commandeEnCours,
+            lignesCommande: lignesEnCours
+        });
+    } else {
+        res.redirect("/login");
+    }
+});
+
+
 //Le formulaire de connexion redirige ici
 app.post("/try-login", async (req, res) => {
     if (req.body["nom"] === undefined || req.body["mdp"] === undefined) {
