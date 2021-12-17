@@ -9,7 +9,7 @@
     <script-file value="$PROJECT_DIR$/bdd/Reapprovisionnement.sql" />
     <script-file value="$PROJECT_DIR$/bdd/Reparation.sql" />
     <script-mode>FILE</script-mode>
-    <data-source id="33718811-4d3b-4637-9de0-a0daeb8fcbf7" namespace="database/&quot;iut&quot;/schema/&quot;public&quot;" />
+    <data-source id="33718811-4d3b-4637-9de0-a0daeb8fcbf7" namespace="database/&quot;projet_web&quot;/schema/&quot;public&quot;" />
     <method v="2" />
   </configuration>
 </component>
