@@ -42,6 +42,8 @@ app.get("/", async (req, res) => {
     res.status(200);
     res.contentType("text/plain");
     res.end("Accueil");  //TODO utiliser render() pour la page EJS
+
+    //TODO présenter un bouton login / inscription
 });
 
 app.get("/login", async (req, res) => {
@@ -54,7 +56,17 @@ app.get("/login", async (req, res) => {
     }
 });
 
-//Le formulaire redirige ici
+app.get("/inscription", async (req, res) => {
+    //Si on n'est pas connecté, afficher la page d'inscription
+    //Sinon rediriger vers le catalogue
+    if (await isLogon(req)) {
+        res.redirect("/catalogue");
+    } else {
+        res.render("Inscription");
+    }
+});
+
+//Le formulaire de connexion redirige ici
 app.post("/try-login", async (req, res) => {
     if (!req.body.hasOwnProperty("nom") || !req.body.hasOwnProperty("mdp")) {
         res.status(403)
@@ -81,9 +93,41 @@ app.post("/try-login", async (req, res) => {
     }
 });
 
+app.post("/try-inscription", async (req, res) => {
+    if (!req.body.hasOwnProperty("nom") || !req.body.hasOwnProperty("mdp")) {
+        res.status(403)
+        res.end()
+
+        return;
+    }
+
+    let nom = req.body.nom;
+    let mdp = req.body.mdp;
+
+    let clientTrouve = await client.findOne({
+        where: {
+            "nom": nom
+        }
+    });
+
+    if (clientTrouve != null) {
+       res.redirect("/inscription");
+    } else {
+        await client.create({
+            nom: nom,
+            mdp: mdp
+        })
+
+        res.cookie("nom", nom);
+        res.cookie("mdp", mdp);
+
+        res.redirect("/catalogue");
+    }
+});
+
 //Vérifie que l'utilisateur est connecté
 async function isLogon(req) {
-    if (!req.cookies.hasOwnProperty("nom") || !req.cookies.hasOwnProperty("mdp")) {
+    if (req.cookies === undefined || !req.cookies.hasOwnProperty("nom") || !req.cookies.hasOwnProperty("mdp")) {
         return false;
     }
 
