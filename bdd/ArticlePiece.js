@@ -3,7 +3,7 @@ const {sequelize, DataTypes} = require('./../BDD.js')
 const article = sequelize.define(
     "ArticlePiece",
     {
-        idArticle: {type: DataTypes.INTEGER},
+        idArticle: {type: DataTypes.INTEGER} //TODO ajouter attributs
     },
     {
         tableName: "articlepiece",
