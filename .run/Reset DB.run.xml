@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Reset DB" type="DatabaseScript">
+    <script-file value="$PROJECT_DIR$/bdd/Reset.sql" />
+    <script-file value="$PROJECT_DIR$/bdd/Article.sql" />
+    <script-file value="$PROJECT_DIR$/bdd/Client.sql" />
+    <script-file value="$PROJECT_DIR$/bdd/Livraison.sql" />
+    <script-file value="$PROJECT_DIR$/bdd/Magasin.sql" />
+    <script-file value="$PROJECT_DIR$/bdd/Stock.sql" />
+    <script-file value="$PROJECT_DIR$/bdd/Reapprovisionnement.sql" />
+    <script-file value="$PROJECT_DIR$/bdd/Reparation.sql" />
+    <script-mode>FILE</script-mode>
+    <data-source id="33718811-4d3b-4637-9de0-a0daeb8fcbf7" namespace="database/&quot;iut&quot;/schema/&quot;public&quot;" />
+    <method v="2" />
+  </configuration>
+</component>
