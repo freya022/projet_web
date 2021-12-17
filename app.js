@@ -49,11 +49,7 @@ test().then(value => {
 });
 
 app.get("/", async (req, res) => {
-    res.status(200);
-    res.contentType("text/plain");
-    res.end("Accueil");  //TODO utiliser render() pour la page EJS
-
-    //TODO présenter un bouton login / inscription
+    res.render("ChoixConnexion");
 });
 
 app.get("/login", async (req, res) => {
