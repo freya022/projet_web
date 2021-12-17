@@ -148,7 +148,7 @@ async function getClientConnecte(req) {
 
 //Vérifie que l'utilisateur est connecté
 async function isLogon(req) {
-    return await getClientConnecte() != null;
+    return await getClientConnecte(req) != null;
 }
 
 app.get("/catalogue", async (req, res) => {
@@ -163,12 +163,9 @@ app.get("/catalogue", async (req, res) => {
 
 app.get("/accueil", async (req, res) => {
     if (await isLogon(req)) {
-        res.status(200); //Le client est déjà connecté
-        res.contentType("text/plain");
-        res.end("accueil"); //TODO utiliser render() pour la page EJS
-        res.render("accueil",{
-            magasin: magasins
-        });
+        let magasins = await magasin.findAll();
+
+        res.render("accueil",{ magasins: magasins });
     } else {
         res.redirect("login"); //Demande au client de se connecter
     }
