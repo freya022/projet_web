@@ -5,3 +5,19 @@ Création d'un site WEB :
 - Pages (Accueil, Info produit, Vente, Réparation, FAQ...)
 - Localisation du magasin le plus proche
 - Livraison (gestion de stock, entrée info livraison)
+
+* Antoine : Magasins (localisation, nom magasin, id du stock, accepte les réparations ?)
+* Yorann : Stock
+* Théo : Articles (pièces et vélos)
+* Antoine : Livraisons
+* Théo : Réparations (réparations disponibles, chaque magasin peut faire des réparations différents, prix réparation, temps de réparation)
+* Léo : Réapprovisionnement (id stock, id article, quantite)
+* ArticleVelo (table velo avec référence vers l'id d'article (table Articles))
+* ArticlePiece (table pièces détachée avec référence vers l'id d'article (table Articles))
+
+
+Utilisation de GitHub pour travailler en commun, chacun sur sa branche
+Site de vente de vélos et de pièces détachées
+Système de livraison, gérer les stocks
+Maquette du site sur Balsamiq
+Partie BDD du site
