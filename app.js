@@ -73,9 +73,28 @@ app.get("/commande", async (req, res) => {
     //Si on n'est pas connecté, afficher la page d'inscription
     //Sinon rediriger vers le catalogue
     if (await isLogon(req)) {
-        res.render("pageCommande", {commandes: commande});
+        let clientConnecte = getClientConnecte(req);
+
+        let commandeEnCours = await commande.findOne({
+            where: {
+                idClient: clientConnecte.idClient;
+            }
+        });
+
+        //TODO si il n'y a pas de commande
+
+        let lignesEnCours = await ligneCommande.findAll({
+            where: {
+                idCommande: commandeEnCours.idCommande
+            }
+        });
+
+        res.render("pageCommande", {
+            commande: commandeEnCours,
+            lignesCommande: lignesEnCours
+        });
     } else {
-        res.render("Login");
+        res.redirect("/login");
     }
 });
 
