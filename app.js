@@ -68,7 +68,7 @@ app.get("/inscription", async (req, res) => {
 
 //Le formulaire de connexion redirige ici
 app.post("/try-login", async (req, res) => {
-    if (!req.body.hasOwnProperty("nom") || !req.body.hasOwnProperty("mdp")) {
+    if (req.body["nom"] === undefined || req.body["mdp"] === undefined) {
         res.status(403)
         res.end()
 
@@ -90,11 +90,14 @@ app.post("/try-login", async (req, res) => {
         res.cookie("mdp", mdp);
 
         res.redirect("/catalogue");
+    } else {
+        res.status(403);
+        res.redirect("/login");
     }
 });
 
 app.post("/try-inscription", async (req, res) => {
-    if (!req.body.hasOwnProperty("nom") || !req.body.hasOwnProperty("mdp")) {
+    if (req.body["nom"] === undefined || req.body["mdp"] === undefined) {
         res.status(403)
         res.end()
 
@@ -127,7 +130,7 @@ app.post("/try-inscription", async (req, res) => {
 
 //Vérifie que l'utilisateur est connecté
 async function isLogon(req) {
-    if (req.cookies === undefined || !req.cookies.hasOwnProperty("nom") || !req.cookies.hasOwnProperty("mdp")) {
+    if (req.cookies === undefined || req.cookies["nom"] === undefined || req.cookies["mdp"] === undefined) {
         return false;
     }
 
