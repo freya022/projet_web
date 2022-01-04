@@ -26,56 +26,94 @@ async function getClientConnecte(req) {
 }
 
 //TODO test avec le catalogue
-app.get("/mettre-au-panier", async (req, res) => {
+app.post("/mettre-au-panier/:idArticle", async (req, res) => {
     if (await isLogon(req)) {
-        if (req.body.idArticle === undefined) {
-            res.status(400);
-            res.end();
-
-            return;
-        }
+        //Pas nécessaire de vérifier la présence du paramètre
+        // Le fait que la propriété soit dans l'URL fait qu'elle est obligatoirement la
+        let idArticle = req.params.idArticle;
 
         res.status(200);
 
-        let clientConnecte = getClientConnecte(req);
+        let clientConnecte = await getClientConnecte(req);
         let commandeEnCours = await commande.findOne({
             where: {
-                idClient: clientConnecte.idClient,
+                id_client: clientConnecte.idClient,
                 fini: false
             }
         });
 
         if (commandeEnCours === null) {
             commandeEnCours = await commande.create({
-                idClient: clientConnecte.idClient
+                id_client: clientConnecte.idClient
             });
         }
 
-        let idArticle = req.header("idArticle");
-
-        let ligneEnCours = await commande.findOne({
+        let ligneEnCours = await ligneCommande.findOne({
             where: {
-                idCommande: commandeEnCours.idCommande,
+                idCommande: commandeEnCours.id_commande,
                 idArticle: idArticle
             }
         });
 
         if (ligneEnCours === null) {
             await ligneCommande.create({
-                idCommande: commandeEnCours.idCommande,
+                idCommande: commandeEnCours.id_commande,
                 idArticle: idArticle,
                 quantite: 1
+            }, {
+                isNewRecord: true
             });
         } else {
             await ligneCommande.update({
                 quantite: ligneEnCours.quantite + 1
             }, {
                 where: {
-                    idCommande: commandeEnCours.idCommande,
+                    idCommande: commandeEnCours.id_commande,
                     idArticle: idArticle
                 }
             });
         }
+
+        res.end();
+    } else {
+        res.status(403);
+        res.end();
+    }
+});
+
+//TODO tester
+app.post("/valider-commande/:idCommande", async (req, res) => {
+    if (await isLogon(req)) {
+        //Pas nécessaire de vérifier la présence du paramètre
+        // Le fait que la propriété soit dans l'URL fait qu'elle est obligatoirement la
+        let idCommande = req.params.idCommande;
+
+        let clientConnecte = await getClientConnecte(req);
+        let commandeEnCours = await commande.findOne({
+            where: {
+                id_commande: idCommande,
+                id_client: clientConnecte.idClient,
+                fini: false
+            }
+        });
+
+        if (commandeEnCours === null) {
+            res.status(404);
+
+            return;
+        } else {
+            res.status(200);
+        }
+
+        await commandeEnCours.update({
+            fini: true
+        }, {
+            where: {
+                id_commande: idCommande,
+                id_client: clientConnecte.idClient,
+                fini: false
+            }
+        });
 
         res.end();
     } else {
