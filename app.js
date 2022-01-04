@@ -1,52 +1,11 @@
-const express = require("express");
-const path = require("path");
-
-const app = express();
-const cookieParser = require('cookie-parser')
-
-app.use(cookieParser())
-
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-app.set("views", path.join(__dirname, "pages"));
-app.set("view engine", "ejs");
-
-app.use('/public', express.static('public'));
+const {app} = require("./app_setup.js")
+const {getClientConnecte, isLogon} = require("./api.js")
 
 const {sequelize} = require('./BDD.js');
 
-const {article} = require('./bdd/Article')
-const {articlePiece} = require('./bdd/ArticlePiece')
-const {articleVelo} = require('./bdd/ArticleVelo')
 const {client} = require('./bdd/Client')
 const {commande} = require('./bdd/Commande')
-const {ligneCommande} = require('./bdd/LigneCommande')
-const {livraison} = require('./bdd/Livraison')
 const {magasin} = require('./bdd/Magasin')
-const {reapprovisionnement} = require('./bdd/Reapprovisionnement');
-const {reparation} = require('./bdd/Reparation')
-const {stock} = require('./bdd/Stock')
-
-async function test() {
-    let articles = await article.findAll();
-    let articlePieces = await articlePiece.findAll();
-    let articleVelos = await articleVelo.findAll();
-    let clients = await client.findAll();
-    let commandes = await commande.findAll();
-    let ligneCommandes = await ligneCommande.findAll();
-    let livraisons = await livraison.findAll();
-    let magasins = await magasin.findAll();
-    let reapprovisionnements = await reapprovisionnement.findAll();
-    let reparations = await reparation.findAll();
-    let stocks = await stock.findAll();
-}
-
-test().then(value => {
-    console.log("OK");
-}).catch(reason => {
-    console.log(reason);
-});
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
@@ -157,7 +116,7 @@ app.post("/try-inscription", async (req, res) => {
     });
 
     if (clientTrouve != null) {
-       res.redirect("/inscription");
+        res.redirect("/inscription");
     } else {
         await client.create({
             nom: nom,
@@ -170,27 +129,6 @@ app.post("/try-inscription", async (req, res) => {
         res.redirect("/catalogue");
     }
 });
-
-async function getClientConnecte(req) {
-    if (req.cookies === undefined || req.cookies["nom"] === undefined || req.cookies["mdp"] === undefined) {
-        return null;
-    }
-
-    let nom = req.cookies["nom"]
-    let mdp = req.cookies["mdp"]
-
-    return await client.findOne({
-        where: {
-            "nom": nom,
-            "mdp": mdp
-        }
-    });
-}
-
-//Vérifie que l'utilisateur est connecté
-async function isLogon(req) {
-    return await getClientConnecte(req) != null;
-}
 
 app.get("/catalogue", async (req, res) => {
     if (await isLogon(req)) {
@@ -206,7 +144,7 @@ app.get("/accueil", async (req, res) => {
     if (await isLogon(req)) {
         let magasins = await magasin.findAll();
 
-        res.render("accueil",{ magasins: magasins });
+        res.render("accueil", {magasins: magasins});
     } else {
         res.redirect("login"); //Demande au client de se connecter
     }
