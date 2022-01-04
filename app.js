@@ -142,9 +142,7 @@ app.get("/catalogue", async (req, res) => {
 
 app.get("/reparation", async (req, res) => {
     if (await isLogon(req)) {
-        res.status(200);
-        res.contentType("text/plain");
-        res.end("Reparation");
+        res.render("Reparation");
     } else {
         red.redirect("login");
     }
