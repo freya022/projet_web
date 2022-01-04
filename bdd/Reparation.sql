@@ -1,5 +1,6 @@
 CREATE TABLE Reparation
 (
+    nomReparation   text           not null,
     idReparation    serial primary key,
     idArticle       serial references Article (idArticle),
     idMagasin       serial references magasin (idMagasin),
