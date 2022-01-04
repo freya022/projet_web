@@ -146,13 +146,12 @@ app.get("/catalogue", async (req, res) => {
 
 app.get("/reparations", async (req, res) => {
     if (await isLogon(req)) {
-        let reparations = await reparation.findAll();
+        let reparations = await sequelize.query('select * from reparation join magasin using (idMagasin)', {type: sequelize.QueryTypes.SELEC})
 
         res.render("Reparations", {reparations: reparations});
     } else {
         res.redirect("login");
     }
-    let reparationMagasin = await sequelize.query('select * from reparation join magasin using (idMagasin)', {type: sequelize.QueryTypes.SELEC})
 });
 
 app.get("/accueil", async (req, res) => {
