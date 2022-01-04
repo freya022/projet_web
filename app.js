@@ -6,6 +6,7 @@ const {sequelize} = require('./BDD.js');
 const {client} = require('./bdd/Client')
 const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
+const {reparation} = require("./bdd/Reparation");
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
@@ -143,11 +144,13 @@ app.get("/catalogue", async (req, res) => {
     }
 });
 
-app.get("/reparation", async (req, res) => {
+app.get("/reparations", async (req, res) => {
     if (await isLogon(req)) {
-        res.render("Reparation");
+        let reparations = await reparation.findAll();
+
+        res.render("Reparations", {reparations: reparations});
     } else {
-        red.redirect("login");
+        res.redirect("login");
     }
 });
 
