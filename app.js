@@ -54,7 +54,10 @@ app.get("/commande", async (req, res) => {
         }
 
         // language=PostgreSQL
-        let lignesEnCours = await sequelize.query(`select * from ligneCommande join article using(idArticle) where idCommande = ${commandeEnCours.idCommande}`, {
+        let lignesEnCours = await sequelize.query(`select *
+                                                   from ligneCommande
+                                                            join article using (idArticle)
+                                                   where idCommande = ${commandeEnCours.idCommande}`, {
             type: sequelize.QueryTypes.SELECT
         });
 
