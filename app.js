@@ -1,5 +1,5 @@
 const {app} = require("./app_setup.js")
-const {getClientConnecte} = require("./api.js")
+const {getClientConnecte, isLogon} = require("./api.js")
 
 const {sequelize} = require('./BDD.js');
 
@@ -129,11 +129,6 @@ app.post("/try-inscription", async (req, res) => {
         res.redirect("/catalogue");
     }
 });
-
-//Vérifie que l'utilisateur est connecté
-async function isLogon(req) {
-    return await getClientConnecte(req) != null;
-}
 
 app.get("/catalogue", async (req, res) => {
     if (await isLogon(req)) {

@@ -4,6 +4,11 @@ const {commande} = require("./bdd/Commande");
 const {ligneCommande} = require("./bdd/LigneCommande");
 const {client} = require("./bdd/Client");
 
+//Vérifie que l'utilisateur est connecté
+async function isLogon(req) {
+    return await getClientConnecte(req) != null;
+}
+
 async function getClientConnecte(req) {
     if (req.cookies === undefined || req.cookies["nom"] === undefined || req.cookies["mdp"] === undefined) {
         return null;
@@ -79,5 +84,6 @@ app.get("/mettre-au-panier", async (req, res) => {
 });
 
 module.exports = {
-    getClientConnecte
+    getClientConnecte,
+    isLogon
 }
