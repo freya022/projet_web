@@ -53,7 +53,7 @@ app.post("/mettre-au-panier/:idArticle", async (req, res) => {
             });
         }
 
-        let ligneEnCours = await commande.findOne({
+        let ligneEnCours = await ligneCommande.findOne({
             where: {
                 idCommande: commandeEnCours.idCommande,
                 idArticle: idArticle
