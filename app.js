@@ -7,6 +7,7 @@ const {client} = require('./bdd/Client')
 const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
 const {reparation} = require("./bdd/Reparation");
+const {livraison} = require("./bdd/Livraison");
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
@@ -163,6 +164,36 @@ app.get("/accueil", async (req, res) => {
         res.render("accueil", {magasins: magasins});
     } else {
         res.redirect("login"); //Demande au client de se connecter
+    }
+});
+
+app.get("/suiviLivraison", async (req, res) => {
+    if (await isLogon(req)) {
+        res.render("suiviLivraison", {livraison: undefined});
+    } else {
+        res.redirect("login");
+    }
+});
+
+app.post("/suiviLivraison", async (req, res) => {
+    if (await isLogon(req)) {
+        if (req.body.idLivraison === undefined) {
+            res.render("suiviLivraison", {livraison: undefined});
+        } else {
+            let livraisonSelect = await livraison.findOne({
+                where: {
+                    idLivraison: req.body.idLivraison
+                }
+            });
+
+            if (livraisonSelect === null) {
+                res.render("suiviLivraison", {livraison: undefined});
+            } else {
+                res.render("suiviLivraison", {livraison: livraisonSelect});
+            }
+        }
+    } else {
+        res.redirect("login");
     }
 });
 
