@@ -9,5 +9,45 @@
 </head>
 <body>
 
+<!-- En-tête de la page avec le menu de navigation -->
+<header>
+    <h1>Commande</h1>
+    <nav>
+        <ul>
+            <li><a href="/accueil">Accueil</a></li>
+            <li><a href="/catalogue">Catalogue</a></li>
+            <li><a href="/suiviLivraison">Suivi de livraison</a></li>
+            <li><a href="/reparation">Réparation</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<!-- Partie principale de la page qui sert à visualiser le suivi de la livraison -->
+<main>
+    <h1>Suivi de livraison</h1>
+
+    <form action="pageCommande.ejs" method="post">
+        <label for="idLivraison">Entrez le numéro de votre commande : </label>
+        <input type="text" id="idLivraison" name="idLivraison">
+    </form>
+
+    <h2>Suivez votre commande numéro : <%= idLivraison %> </h2>
+
+    <table>
+        <tr>
+            <th>Date de livraison</th>
+            <th>Date d'arrivée</th>
+        </tr>
+        <% lignesLivraison.forEach(idLivraison) => { %>
+            <tr>
+                <td><%= livraison.dateLivraisonPrevu %>
+                <td>
+                <td><%= livraison.dateArrive %></td>
+            </tr>
+        <% }); %>
+    </table>
+</main>
+
 </body>
 </html>
