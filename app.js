@@ -20,7 +20,7 @@ const {article} = require('./bdd/Article')
 const {articlePiece} = require('./bdd/ArticlePiece')
 const {articleVelo} = require('./bdd/ArticleVelo')
 const {client} = require('./bdd/Client')
-const {commande} = require('./bdd/Commande')
+const {commande, commande} = require('./bdd/Commande')
 const {ligneCommande} = require('./bdd/LigneCommande')
 const {livraison} = require('./bdd/Livraison')
 const {magasin} = require('./bdd/Magasin')
@@ -91,7 +91,10 @@ app.get("/commande", async (req, res) => {
         }
 
         // language=PostgreSQL
-        let lignesEnCours = await sequelize.query(`select * from ligneCommande join article using(idArticle) where idCommande = ${commandeEnCours.idCommande}`, {
+        let lignesEnCours = await sequelize.query(`select *
+                                                   from ligneCommande
+                                                            join article using (idArticle)
+                                                   where idCommande = ${commandeEnCours.idCommande}`, {
             type: sequelize.QueryTypes.SELECT
         });
 
@@ -153,7 +156,7 @@ app.post("/try-inscription", async (req, res) => {
     });
 
     if (clientTrouve != null) {
-       res.redirect("/inscription");
+        res.redirect("/inscription");
     } else {
         await client.create({
             nom: nom,
@@ -202,12 +205,23 @@ app.get("/accueil", async (req, res) => {
     if (await isLogon(req)) {
         let magasins = await magasin.findAll();
 
-        res.render("accueil",{ magasins: magasins });
+        res.render("accueil", {magasins: magasins});
     } else {
         res.redirect("login"); //Demande au client de se connecter
+    }
+});
+
+app.get("/suiviLivraison", async (req, res) => {
+    if (await isLogon(req)) {
+        res.status(200);
+        res.contentType("text/plain");
+        res.end("suiviLivraison");
+    } else {
+        res.redirect("login");
     }
 });
 
 app.listen(8080, "localhost", () => {
     console.log("Server running");
 });
+
