@@ -1,0 +1,28 @@
+<link href="../public/Reparation.css" rel="stylesheet">
+<title>Reparation</title>
+
+<header>
+    <nav class="navBar">
+        <ul>
+            <li><a href="/accueil">Accueil</a></li>
+            <li><a href="/catalogue">Catalogue</a></li>
+            <li><a href="/livraisons">Suivi de Livraison</a></li>
+            <li><a href="/reparations">Réparation</a></li>
+            <li><a href="/magasins">Vos Magasin</a></li>
+        </ul>
+    </nav>
+</header>
+
+<h1> Reparations disponibles</h1>
+
+<% reparations.forEach((reparation) => { %>
+    <ul>
+        <li><%= reparation.nomReparation %>
+            <li><%= magasin.nomMagasin %></li>
+            <li><%= article.nomArticle %></li>
+            <li><%= reparation.prix %></li>
+            <li><%= reparation.tempsReparation %></li>
+        </li>
+    </ul>
+    <br>
+<% }); %>
