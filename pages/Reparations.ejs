@@ -15,21 +15,19 @@
 
 <h1> Reparations disponibles</h1>
 
-<table border="10">
+<table border="7">
     <tr>
         <td>Nom Reparation</td>
         <td>Nom Magasin</td>
-        <td>Nom Article</td>
         <td>Prix</td>
         <td>Temps Reparation</td>
     </tr>
 <% reparations.forEach((reparation) => { %>
     <tr>
-        <td><%= reparation.nomReparation %>
-        <td><%= magasin.nomMagasin %></td>
-        <td><%= article.nomArticle %></td>
+        <td><%= reparation.nomreparation %></td>
+        <td><%= reparation.nommagasin %></td>
         <td><%= reparation.prix %></td>
-        <td><%= reparation.tempsReparation %></td>
+        <td><%= reparation.tempsreparation %></td>
     </tr>
     </table>
 <% }); %>
