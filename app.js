@@ -213,9 +213,7 @@ app.get("/accueil", async (req, res) => {
 
 app.get("/suiviLivraison", async (req, res) => {
     if (await isLogon(req)) {
-        res.status(200);
-        res.contentType("text/plain");
-        res.end("suiviLivraison");
+        res.render("suiviLivraison");
     } else {
         res.redirect("login");
     }
