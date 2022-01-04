@@ -30,6 +30,7 @@
     <form action="/suiviLivraison" method="post">
         <label for="idLivraison">Entrez le numéro de votre commande : </label>
         <input type="text" id="idLivraison" name="idLivraison">
+        <input type="submit">
     </form>
 
     <% if(livraison !== undefined) { %>
@@ -39,10 +40,10 @@
                 <th>Date de livraison</th>
                 <th>Date d'arrivée</th>
             </tr>
-                <tr>
-                    <td><%= livraison.dateLivraisonPrevu %>
-                    <td><%= livraison.dateArrive %></td>
-                </tr>
+            <tr>
+                <td><%= livraison.dateLivraisonPrevu %>
+                <td><%= livraison.dateArrive %></td>
+            </tr>
         </table>
     <% } else { %>
         <p>Aucune livraison selectionnée.</p>

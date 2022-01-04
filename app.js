@@ -6,6 +6,7 @@ const {sequelize} = require('./BDD.js');
 const {client} = require('./bdd/Client')
 const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
+const {livraison} = require("./bdd/Livraison");
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
@@ -173,7 +174,21 @@ app.get("/suiviLivraison", async (req, res) => {
 
 app.post("/suiviLivraison", async (req, res) => {
     if (await isLogon(req)) {
-        res.render("suiviLivraison", {livraison: undefined});
+        if (req.body.idLivraison === undefined) {
+            res.render("suiviLivraison", {livraison: undefined});
+        } else {
+            let livraisonSelect = await livraison.findOne({
+                where: {
+                    idLivraison: req.body.idLivraison
+                }
+            });
+
+            if (livraisonSelect === null) {
+                res.render("suiviLivraison", {livraison: undefined});
+            } else {
+                res.render("suiviLivraison", {livraison: livraisonSelect});
+            }
+        }
     } else {
         res.redirect("login");
     }
