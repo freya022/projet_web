@@ -152,6 +152,7 @@ app.get("/reparations", async (req, res) => {
     } else {
         res.redirect("login");
     }
+    let reparationMagasin = await sequelize.query('select * from reparation join magasin using (idMagasin)', {type: sequelize.QueryTypes.SELEC})
 });
 
 app.get("/accueil", async (req, res) => {
