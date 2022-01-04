@@ -26,9 +26,11 @@ async function getClientConnecte(req) {
 }
 
 //TODO test avec le catalogue
-app.get("/mettre-au-panier", async (req, res) => {
+app.post("/mettre-au-panier/:idArticle", async (req, res) => {
     if (await isLogon(req)) {
-        if (req.body.idArticle === undefined) {
+        let idArticle = req.params.idArticle;
+
+        if (idArticle === undefined) {
             res.status(400);
             res.end();
 
@@ -50,8 +52,6 @@ app.get("/mettre-au-panier", async (req, res) => {
                 idClient: clientConnecte.idClient
             });
         }
-
-        let idArticle = req.header("idArticle");
 
         let ligneEnCours = await commande.findOne({
             where: {
@@ -85,9 +85,12 @@ app.get("/mettre-au-panier", async (req, res) => {
 });
 
 //TODO tester
-app.get("/valider-commande", async (req, res) => {
+app.post("/valider-commande/:idCommande", async (req, res) => {
     if (await isLogon(req)) {
-        if (req.body.idCommande === undefined) {
+        let idCommande = req.params.idCommande;
+
+        //TODO nécessaire ?
+        if (idCommande === undefined) {
             res.status(400);
             res.end();
 
@@ -97,7 +100,7 @@ app.get("/valider-commande", async (req, res) => {
         let clientConnecte = getClientConnecte(req);
         let commandeEnCours = await commande.findOne({
             where: {
-                idCommande: req.body.idCommande,
+                idCommande: idCommande,
                 idClient: clientConnecte.idClient,
                 fini: false
             }
@@ -115,7 +118,7 @@ app.get("/valider-commande", async (req, res) => {
             fini: true
         }, {
             where: {
-                idCommande: req.body.idCommande,
+                idCommande: idCommande,
                 idClient: clientConnecte.idClient,
                 fini: false
             }
