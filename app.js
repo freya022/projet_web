@@ -1,55 +1,18 @@
-const express = require("express");
-const path = require("path");
-
-const app = express();
-const cookieParser = require('cookie-parser')
-
-app.use(cookieParser())
-
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-app.set("views", path.join(__dirname, "pages"));
-app.set("view engine", "ejs");
-
-app.use('/public', express.static('public'));
+const {app} = require("./app_setup.js")
+const {getClientConnecte, isLogon} = require("./api.js")
 
 const {sequelize} = require('./BDD.js');
 
-const {article} = require('./bdd/Article')
-const {articlePiece} = require('./bdd/ArticlePiece')
-const {articleVelo} = require('./bdd/ArticleVelo')
 const {client} = require('./bdd/Client')
-const {commande, commande} = require('./bdd/Commande')
-const {ligneCommande} = require('./bdd/LigneCommande')
-const {livraison} = require('./bdd/Livraison')
+const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
-const {reapprovisionnement} = require('./bdd/Reapprovisionnement');
-const {reparation} = require('./bdd/Reparation')
-const {stock} = require('./bdd/Stock')
-
-async function test() {
-    let articles = await article.findAll();
-    let articlePieces = await articlePiece.findAll();
-    let articleVelos = await articleVelo.findAll();
-    let clients = await client.findAll();
-    let commandes = await commande.findAll();
-    let ligneCommandes = await ligneCommande.findAll();
-    let livraisons = await livraison.findAll();
-    let magasins = await magasin.findAll();
-    let reapprovisionnements = await reapprovisionnement.findAll();
-    let reparations = await reparation.findAll();
-    let stocks = await stock.findAll();
-}
-
-test().then(value => {
-    console.log("OK");
-}).catch(reason => {
-    console.log(reason);
-});
 
 app.get("/", async (req, res) => {
-    res.render("ChoixConnexion");
+    if (await isLogon(req)) {
+        res.redirect("/catalogue");
+    } else {
+        res.render("ChoixConnexion");
+    }
 });
 
 app.get("/login", async (req, res) => {
@@ -170,27 +133,6 @@ app.post("/try-inscription", async (req, res) => {
     }
 });
 
-async function getClientConnecte(req) {
-    if (req.cookies === undefined || req.cookies["nom"] === undefined || req.cookies["mdp"] === undefined) {
-        return null;
-    }
-
-    let nom = req.cookies["nom"]
-    let mdp = req.cookies["mdp"]
-
-    return await client.findOne({
-        where: {
-            "nom": nom,
-            "mdp": mdp
-        }
-    });
-}
-
-//Vérifie que l'utilisateur est connecté
-async function isLogon(req) {
-    return await getClientConnecte(req) != null;
-}
-
 app.get("/catalogue", async (req, res) => {
     if (await isLogon(req)) {
         res.status(200); //Le client est déjà connecté
@@ -198,6 +140,16 @@ app.get("/catalogue", async (req, res) => {
         res.end("Catalogue"); //TODO utiliser render() pour la page EJS
     } else {
         res.redirect("login"); //Demande au client de se connecter
+    }
+});
+
+app.get("/reparation", async (req, res) => {
+    if (await isLogon(req)) {
+        res.status(200);
+        res.contentType("text/plain");
+        res.end("Reparation");
+    } else {
+        red.redirect("login");
     }
 });
 
@@ -223,3 +175,32 @@ app.listen(8080, "localhost", () => {
     console.log("Server running");
 });
 
+function testApi() {
+    const axios = require("axios");
+
+    axios.post('http://localhost:8080/mettre-au-panier/1', {}, {
+        headers: {
+            "Cookie": `nom=nom; mdp=mdp`
+        }
+    })
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    axios.post('http://localhost:8080/valider-commande/2', {}, {
+        headers: {
+            "Cookie": `nom=nom; mdp=mdp`
+        }
+    })
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+// testApi();
