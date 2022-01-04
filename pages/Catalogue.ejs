@@ -1,18 +1,6 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="../public/localisationMagasin.css" rel="stylesheet">
-    <title>Localisation</title>
-</head>
+<link href="../public/Catalogue.css" rel="stylesheet">
+<title>Catalogue</title>
 
-
-<body>
-
-<!-- En-tête de la page avec le menu de navigation -->
 <header>
     <nav class="navBar">
         <ul>
@@ -26,14 +14,24 @@
     </nav>
 </header>
 
-<!-- Partie principale de la page avec la localisation-->
-<main>
-    <p>Retrouvez çi dessous le magasin le plus proche de chez vous : </p>
 
-</main>
+<ul>
+    <%articlePiece.forEach(function(articlePiece) { %>
+        <li>
+            <strong><%= articlePiece.idArticle %></strong>
+        </li>
+    <% }); %>
+</ul>
 
+<ul>
+    <%articleVelo.forEach(function(articleVelo) { %>
+        <li>
+            <strong><%= articleVelo.idArticle %></strong>
+            typeVelo <%= articleVelo.typeVelo %>, tailleVelo <%= articleVelo.tailleVelo %>, poidsVelo <%= articleVelo.poidsVelo %>
+        </li>
+    <% }); %>
+</ul>
 
-<!-- Bas de la page avec d'autres informations -->
 <footer>
 
     <ul class="ulFooter">
@@ -43,7 +41,3 @@
         <li>Adresse : Maubeuge, Bd Charles de Gaulle, 59600 Maubeuge</li>
     </ul>
 </footer>
-
-
-</body>
-</html>

@@ -137,9 +137,13 @@ app.post("/try-inscription", async (req, res) => {
 
 app.get("/catalogue", async (req, res) => {
     if (await isLogon(req)) {
-        res.status(200); //Le client est déjà connecté
-        res.contentType("text/plain");
-        res.end("Catalogue"); //TODO utiliser render() pour la page EJS
+        let articleVelo = await articleVelo.findAll();
+        let articlePiece = await articlePiece.findAll();
+
+
+        res.render("catalogue",{articlePiece: articlePiece, articleVelo: articleVelo}); //TODO utiliser render() pour la page EJS
+
+
     } else {
         res.redirect("login"); //Demande au client de se connecter
     }
