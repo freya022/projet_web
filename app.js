@@ -167,28 +167,32 @@ app.listen(8080, "localhost", () => {
     console.log("Server running");
 });
 
-const axios = require("axios");
+function testApi() {
+    const axios = require("axios");
 
-axios.post('http://localhost:8080/mettre-au-panier/1', {}, {
-    headers: {
-        "Cookie": `nom=nom; mdp=mdp`
-    }
-})
-    .then(response => {
-        console.log(response.data)
+    axios.post('http://localhost:8080/mettre-au-panier/1', {}, {
+        headers: {
+            "Cookie": `nom=nom; mdp=mdp`
+        }
     })
-    .catch(error => {
-        console.log(error);
-    });
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.log(error);
+        });
 
-axios.post('http://localhost:8080/valider-commande/2', {}, {
-    headers: {
-        "Cookie": `nom=nom; mdp=mdp`
-    }
-})
-    .then(response => {
-        console.log(response.data)
+    axios.post('http://localhost:8080/valider-commande/2', {}, {
+        headers: {
+            "Cookie": `nom=nom; mdp=mdp`
+        }
     })
-    .catch(error => {
-        console.log(error);
-    });
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+// testApi();
