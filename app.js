@@ -49,11 +49,11 @@ test().then(value => {
 });
 
 app.get("/", async (req, res) => {
-    res.status(200);
-    res.contentType("text/plain");
-    res.end("Accueil");  //TODO utiliser render() pour la page EJS
-
-    //TODO présenter un bouton login / inscription
+    if (await isLogon(req)) {
+        res.redirect("/catalogue");
+    } else {
+        res.render("ChoixConnexion");
+    }
 });
 
 app.get("/login", async (req, res) => {
@@ -75,6 +75,39 @@ app.get("/inscription", async (req, res) => {
         res.render("Inscription");
     }
 });
+
+app.get("/commande", async (req, res) => {
+    //Si on n'est pas connecté, afficher la page d'inscription
+    //Sinon rediriger vers le catalogue
+    if (await isLogon(req)) {
+        let clientConnecte = await getClientConnecte(req);
+
+        let commandeEnCours = await commande.findOne({
+            where: {
+                idClient: clientConnecte.idClient
+            }
+        });
+
+        if (commandeEnCours === null) {
+            commandeEnCours = await commande.create({
+                idClient: clientConnecte.idClient
+            });
+        }
+
+        // language=PostgreSQL
+        let lignesEnCours = await sequelize.query(`select * from ligneCommande join article using(idArticle) where idCommande = ${commandeEnCours.idCommande}`, {
+            type: sequelize.QueryTypes.SELECT
+        });
+
+        res.render("pageCommande", {
+            commande: commandeEnCours,
+            lignesCommande: lignesEnCours
+        });
+    } else {
+        res.redirect("/login");
+    }
+});
+
 
 //Le formulaire de connexion redirige ici
 app.post("/try-login", async (req, res) => {
