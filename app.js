@@ -146,7 +146,9 @@ app.get("/catalogue", async (req, res) => {
 
 app.get("/reparations", async (req, res) => {
     if (await isLogon(req)) {
-        let reparations = await sequelize.query('select * from reparation join magasin using (idMagasin)', {type: sequelize.QueryTypes.SELEC})
+        let reparations = await sequelize.query('select * from reparation join magasin using (idMagasin)', {
+            type: sequelize.QueryTypes.SELECT
+        });
 
         res.render("Reparations", {reparations: reparations});
     } else {
