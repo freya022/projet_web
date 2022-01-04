@@ -39,7 +39,7 @@ app.post("/mettre-au-panier/:idArticle", async (req, res) => {
 
         res.status(200);
 
-        let clientConnecte = getClientConnecte(req);
+        let clientConnecte = await getClientConnecte(req);
         let commandeEnCours = await commande.findOne({
             where: {
                 idClient: clientConnecte.idClient,
@@ -97,7 +97,7 @@ app.post("/valider-commande/:idCommande", async (req, res) => {
             return;
         }
 
-        let clientConnecte = getClientConnecte(req);
+        let clientConnecte = await getClientConnecte(req);
         let commandeEnCours = await commande.findOne({
             where: {
                 idCommande: idCommande,
