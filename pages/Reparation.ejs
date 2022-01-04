@@ -1,0 +1,35 @@
+<link href="../public/Reparation.css" rel="stylesheet">
+<title>Reparation</title>
+
+<header>
+    <nav class="navBar">
+        <ul>
+            <li><a href="/accueil">Accueil</a></li>
+            <li><a href="/catalogue">Catalogue</a></li>
+            <li><a href="/livraisons">Suivi de Livraison</a></li>
+            <li><a href="/reparations">Réparation</a></li>
+            <li><a href="/magasins">Vos Magasin</a></li>
+        </ul>
+    </nav>
+</header>
+
+<h1> Reparations disponibles</h1>
+
+<table border="10">
+    <tr>
+        <td>Nom Reparation</td>
+        <td>Nom Magasin</td>
+        <td>Nom Article</td>
+        <td>Prix</td>
+        <td>Temps Reparation</td>
+    </tr>
+<% reparations.forEach((reparation) => { %>
+    <tr>
+        <td><%= reparation.nomReparation %>
+        <td><%= magasin.nomMagasin %></td>
+        <td><%= article.nomArticle %></td>
+        <td><%= reparation.prix %></td>
+        <td><%= reparation.tempsReparation %></td>
+    </tr>
+    </table>
+<% }); %>
