@@ -49,7 +49,11 @@ test().then(value => {
 });
 
 app.get("/", async (req, res) => {
-    res.render("ChoixConnexion");
+    if (await isLogon(req)) {
+        res.redirect("/catalogue");
+    } else {
+        res.render("ChoixConnexion");
+    }
 });
 
 app.get("/login", async (req, res) => {
