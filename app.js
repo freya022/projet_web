@@ -136,7 +136,7 @@ app.get("/catalogue", async (req, res) => {
         let articlePiece = await articlePiece.findAll();
 
 
-        res.render("pages/Catalogue",{articlePiece: articlePiece, articleVelo: articleVelo}); //TODO utiliser render() pour la page EJS
+        res.render("catalogue",{articlePiece: articlePiece, articleVelo: articleVelo}); //TODO utiliser render() pour la page EJS
 
 
     } else {
