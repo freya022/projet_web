@@ -165,7 +165,15 @@ app.get("/accueil", async (req, res) => {
 
 app.get("/suiviLivraison", async (req, res) => {
     if (await isLogon(req)) {
-        res.render("suiviLivraison");
+        res.render("suiviLivraison", {livraison: undefined});
+    } else {
+        res.redirect("login");
+    }
+});
+
+app.post("/suiviLivraison", async (req, res) => {
+    if (await isLogon(req)) {
+        res.render("suiviLivraison", {livraison: undefined});
     } else {
         res.redirect("login");
     }

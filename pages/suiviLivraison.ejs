@@ -27,30 +27,25 @@
 <main>
     <h1>Suivi de livraison</h1>
 
-    <form action="/suiviLivraisonPost" method="post">
+    <form action="/suiviLivraison" method="post">
         <label for="idLivraison">Entrez le numéro de votre commande : </label>
         <input type="text" id="idLivraison" name="idLivraison">
     </form>
 
-    <% if(lignesLivraison) { %>
-
-        <h2>Suivez votre commande numéro : <%= idLivraison %> </h2>
-
+    <% if(livraison !== undefined) { %>
+        <h2>Suivez votre commande numéro : <%= livraison.idLivraison %> </h2>
         <table>
             <tr>
                 <th>Date de livraison</th>
                 <th>Date d'arrivée</th>
             </tr>
-            <% lignesLivraison.forEach((idLivraison) => { %>
                 <tr>
                     <td><%= livraison.dateLivraisonPrevu %>
-                    <td>
                     <td><%= livraison.dateArrive %></td>
                 </tr>
         </table>
-
-    <% })} else { %>>
-        <p>Aucunes livraisons selectionnées.</p>
+    <% } else { %>
+        <p>Aucune livraison selectionnée.</p>
     <% } %>
 
 </main>
