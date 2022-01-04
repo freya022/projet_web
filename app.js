@@ -54,7 +54,10 @@ app.get("/commande", async (req, res) => {
         }
 
         // language=PostgreSQL
-        let lignesEnCours = await sequelize.query(`select * from ligneCommande join article using(idArticle) where idCommande = ${commandeEnCours.idCommande}`, {
+        let lignesEnCours = await sequelize.query(`select *
+                                                   from ligneCommande
+                                                            join article using (idArticle)
+                                                   where idCommande = ${commandeEnCours.idCommande}`, {
             type: sequelize.QueryTypes.SELECT
         });
 
@@ -163,3 +166,33 @@ app.get("/accueil", async (req, res) => {
 app.listen(8080, "localhost", () => {
     console.log("Server running");
 });
+
+function testApi() {
+    const axios = require("axios");
+
+    axios.post('http://localhost:8080/mettre-au-panier/1', {}, {
+        headers: {
+            "Cookie": `nom=nom; mdp=mdp`
+        }
+    })
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+    axios.post('http://localhost:8080/valider-commande/2', {}, {
+        headers: {
+            "Cookie": `nom=nom; mdp=mdp`
+        }
+    })
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
+// testApi();
