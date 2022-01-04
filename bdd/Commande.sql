@@ -1,6 +1,6 @@
 CREATE TABLE Commande
 (
-    idCommande serial primary key,
-    idClient   int  not null references Client,
-    fini       bool not null default false
+    id_commande serial primary key,
+    id_client   int  not null references Client,
+    fini        bool not null default false
 );

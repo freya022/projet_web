@@ -170,3 +170,15 @@ axios.post('http://localhost:8080/mettre-au-panier/1', {}, {
     .catch(error => {
         console.log(error);
     });
+
+axios.post('http://localhost:8080/valider-commande/2', {}, {
+    headers: {
+        "Cookie": `nom=nom; mdp=mdp`
+    }
+})
+    .then(response => {
+        console.log(response.data)
+    })
+    .catch(error => {
+        console.log(error);
+    });
