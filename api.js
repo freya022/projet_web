@@ -25,6 +25,7 @@ async function getClientConnecte(req) {
     });
 }
 
+//TODO test avec le catalogue
 app.get("/mettre-au-panier", async (req, res) => {
     if (await isLogon(req)) {
         if (req.body.idArticle === undefined) {
