@@ -84,6 +84,50 @@ app.get("/mettre-au-panier", async (req, res) => {
     }
 });
 
+//TODO tester
+app.get("/valider-commande", async (req, res) => {
+    if (await isLogon(req)) {
+        if (req.body.idCommande === undefined) {
+            res.status(400);
+            res.end();
+
+            return;
+        }
+
+        let clientConnecte = getClientConnecte(req);
+        let commandeEnCours = await commande.findOne({
+            where: {
+                idCommande: req.body.idCommande,
+                idClient: clientConnecte.idClient,
+                fini: false
+            }
+        });
+
+        if (commandeEnCours === null) {
+            res.status(404);
+
+            return;
+        } else {
+            res.status(200);
+        }
+
+        await commandeEnCours.update({
+            fini: true
+        }, {
+            where: {
+                idCommande: req.body.idCommande,
+                idClient: clientConnecte.idClient,
+                fini: false
+            }
+        });
+
+        res.end();
+    } else {
+        res.status(403);
+        res.end();
+    }
+});
+
 module.exports = {
     getClientConnecte,
     isLogon
