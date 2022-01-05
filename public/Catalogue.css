@@ -1,15 +1,15 @@
 footer{
 
-    background:#ccc;
+    left: 0;
 
-    position:absolute;
+    bottom: 0;
 
-    bottom:0;
+    width: 100%;
 
-    width:100%;
+    background-color: gray;
 
-    padding-top:50px;
+    color: white;
 
-    height:50px;
+    text-align: left;
 
 }
