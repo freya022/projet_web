@@ -27,8 +27,8 @@
                 <th>Date d'arrivée</th>
             </tr>
             <tr>
-                <td><%= livraison.dateLivraisonPrevu %>
-                <td><%= livraison.dateArrive %></td>
+                <td><%= new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' }).format(livraison.dateLivraisonPrevu) %>
+                <td><%= new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short' }).format(livraison.dateArrive) %></td>
             </tr>
         </table>
     <% } else { %>
