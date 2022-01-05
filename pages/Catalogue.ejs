@@ -2,17 +2,8 @@
 <title>Catalogue</title>
 
 <header>
-    <nav class="navBar">
-        <ul>
-            <li><a href="/accueil">Accueil</a></li>
-            <li><a href="/catalogue">Catalogue</a></li>
-            <li><a href="/suiviLivraison">Suivi de Livraison</a></li>
-            <li><a href="/reparations">Réparation</a></li>
-            <li><a href="/localisationMagasin">Vos Magasin</a></li>
-        </ul>
-    </nav>
+    <%- include('NavBar') %>
 </header>
-
 
 <ul>
     <%articlePiece.forEach(function(articlePiece) { %>
