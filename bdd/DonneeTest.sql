@@ -28,3 +28,6 @@ insert into Commande (id_client, fini)
 values (1, false);
 insert into lignecommande (idcommande, idarticle, quantite)
 values (1, 1, 5);
+
+insert into livraison (datelivraisonprevu, datearrive)
+VALUES (now(), now() + interval '1 day');
