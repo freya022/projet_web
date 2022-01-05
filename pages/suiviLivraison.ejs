@@ -11,12 +11,13 @@
 
 <!-- En-tête de la page avec le menu de navigation -->
 <header>
-    <nav>
+    <nav class="navBar">
         <ul>
             <li><a href="/accueil">Accueil</a></li>
             <li><a href="/catalogue">Catalogue</a></li>
-            <li><a href="/suiviLivraison">Suivi de livraison</a></li>
-            <li><a href="/reparation">Réparation</a></li>
+            <li><a href="/suiviLivraison">Suivi de Livraison</a></li>
+            <li><a href="/reparations">Réparation</a></li>
+            <li><a href="/localisationMagasin">Vos Magasin</a></li>
         </ul>
     </nav>
 </header>
@@ -26,30 +27,26 @@
 <main>
     <h1>Suivi de livraison</h1>
 
-    <form action="/suiviLivraisonPost" method="post">
+    <form action="/suiviLivraison" method="post">
         <label for="idLivraison">Entrez le numéro de votre commande : </label>
         <input type="text" id="idLivraison" name="idLivraison">
+        <input type="submit">
     </form>
 
-    <% if(lignesLivraison) { %>
-
-        <h2>Suivez votre commande numéro : <%= idLivraison %> </h2>
-
+    <% if(livraison !== undefined) { %>
+        <h2>Suivez votre commande numéro : <%= livraison.idLivraison %> </h2>
         <table>
             <tr>
                 <th>Date de livraison</th>
                 <th>Date d'arrivée</th>
             </tr>
-            <% lignesLivraison.forEach((idLivraison) => { %>
-                <tr>
-                    <td><%= livraison.dateLivraisonPrevu %>
-                    <td>
-                    <td><%= livraison.dateArrive %></td>
-                </tr>
+            <tr>
+                <td><%= livraison.dateLivraisonPrevu %>
+                <td><%= livraison.dateArrive %></td>
+            </tr>
         </table>
-
-    <% })} else { %>>
-        <p>Aucunes livraisons selectionnées.</p>
+    <% } else { %>
+        <p>Aucune livraison selectionnée.</p>
     <% } %>
 
 </main>

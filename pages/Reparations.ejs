@@ -1,5 +1,5 @@
-<link href="../public/Accueil.css" rel="stylesheet">
-<title>Accueil</title>
+<link href="../public/Reparation.css" rel="stylesheet">
+<title>Reparation</title>
 
 <header>
     <nav class="navBar">
@@ -13,20 +13,24 @@
     </nav>
 </header>
 
-<h1> Magasin à proximité</h1>
+<h1> Reparations disponibles</h1>
 
-<% magasins.forEach((magasin) => { %>
+<table border="7">
     <tr>
-        <td><%= magasin.nomMagasin %></td>
+        <td>Nom Reparation</td>
+        <td>Nom Magasin</td>
+        <td>Prix</td>
+        <td>Temps Reparation</td>
     </tr>
+<% reparations.forEach((reparation) => { %>
+    <tr>
+        <td><%= reparation.nomreparation %></td>
+        <td><%= reparation.nommagasin %></td>
+        <td><%= reparation.prix %></td>
+        <td><%= reparation.tempsreparation %></td>
+    </tr>
+    </table>
 <% }); %>
-
-<h1> Que proposons-nous</h1>
-<ul>
-    <li>Réparation de vos Vélos</li>
-    <li>Catalogue d'équipement ou encore de vélos</li>
-    <li>Vos magasins d'équipement les plus proches</li>
-</ul>
 
 <footer>
 
@@ -37,6 +41,3 @@
         <li>Adresse : Maubeuge, Bd Charles de Gaulle, 59600 Maubeuge</li>
     </ul>
 </footer>
-
-
-

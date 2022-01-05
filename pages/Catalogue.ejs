@@ -1,5 +1,5 @@
-<link href="../public/Accueil.css" rel="stylesheet">
-<title>Accueil</title>
+<link href="../public/Catalogue.css" rel="stylesheet">
+<title>Catalogue</title>
 
 <header>
     <nav class="navBar">
@@ -13,19 +13,22 @@
     </nav>
 </header>
 
-<h1> Magasin à proximité</h1>
 
-<% magasins.forEach((magasin) => { %>
-    <tr>
-        <td><%= magasin.nomMagasin %></td>
-    </tr>
-<% }); %>
-
-<h1> Que proposons-nous</h1>
 <ul>
-    <li>Réparation de vos Vélos</li>
-    <li>Catalogue d'équipement ou encore de vélos</li>
-    <li>Vos magasins d'équipement les plus proches</li>
+    <%articlePiece.forEach(function(articlePiece) { %>
+        <li>
+            <strong><%= articlePiece.idArticle %></strong>
+        </li>
+    <% }); %>
+</ul>
+
+<ul>
+    <%articleVelo.forEach(function(articleVelo) { %>
+        <li>
+            <strong><%= articleVelo.idArticle %></strong>
+            typeVelo <%= articleVelo.typeVelo %>, tailleVelo <%= articleVelo.tailleVelo %>, poidsVelo <%= articleVelo.poidsVelo %>
+        </li>
+    <% }); %>
 </ul>
 
 <footer>
@@ -37,6 +40,3 @@
         <li>Adresse : Maubeuge, Bd Charles de Gaulle, 59600 Maubeuge</li>
     </ul>
 </footer>
-
-
-

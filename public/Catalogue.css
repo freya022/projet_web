@@ -1,0 +1,30 @@
+.navBar a{
+
+    color: gray;
+    padding: 8px;
+}
+
+.navBar li{
+    display: inline;
+}
+
+.navBar{
+
+    padding-left: 700px ;
+
+}
+footer{
+
+    background:#ccc;
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    padding-top:50px;
+
+    height:50px;
+
+}
