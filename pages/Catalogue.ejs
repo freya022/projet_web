@@ -9,27 +9,18 @@
             <li><a href="/suivi">Suivi de Livraison</a></li>
             <li><a href="/reparation">Réparation</a></li>
             <li><a href="/localisationMagasin">Vos Magasin</a></li>
-            z
+
         </ul>
     </nav>
 </header>
 
-
 <ul>
-    <%articlePiece.forEach(function(articlePiece) { %>
+    <%article.forEach(function(article) { %>
         <li>
-            <strong><%= articlePiece.idArticle %></strong>
+            <strong><%= article.idArticle %></strong>
+            Nom <%= article.nomArticle %>, categorie <%= article.categorie%>, prix <%= article.prix %> €
         </li>
-    <% }); %>
-</ul>
-
-<ul>
-    <%articleVelo.forEach(function(articleVelo) { %>
-        <li>
-            <strong><%= articleVelo.idArticle %></strong>
-            typeVelo <%= articleVelo.typeVelo %>, tailleVelo <%= articleVelo.tailleVelo %>, poidsVelo <%= articleVelo.poidsVelo %>
-        </li>
-    <% }); %>
+    <% });%>
 </ul>
 
 <footer>

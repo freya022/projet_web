@@ -8,6 +8,7 @@ const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
 const {reparation} = require("./bdd/Reparation");
 const {livraison} = require("./bdd/Livraison");
+const {article} = require("./bdd/Article");
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
@@ -141,7 +142,7 @@ app.get("/catalogue", async (req, res) => {
         let articlePiece = await articlePiece.findAll();
 
 
-        res.render("catalogue",{articlePiece: articlePiece, articleVelo: articleVelo}); //TODO utiliser render() pour la page EJS
+        res.render("catalogue",{article: article,articlePiece: articlePiece, articleVelo: articleVelo}); //TODO utiliser render() pour la page EJS
 
 
     } else {
