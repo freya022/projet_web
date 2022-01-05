@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Suivi livraison</title>
+</head>
+<body>
+
+<!-- En-tête de la page avec le menu de navigation -->
+<header>
+    <h1>Commande</h1>
+    <nav class="navBar">
+        <ul>
+            <li><a href="/accueil">Accueil</a></li>
+            <li><a href="/catalogue">Catalogue</a></li>
+            <li><a href="/suiviLivraison">Suivi de Livraison</a></li>
+            <li><a href="/reparations">Réparation</a></li>
+            <li><a href="/localisationMagasin">Vos Magasin</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<!-- Partie principale de la page qui sert à visualiser le suivi de la livraison -->
+<main>
+    <h1>Suivi de livraison</h1>
+
+    <form action="/suiviLivraison" method="post">
+        <label for="idLivraison">Entrez le numéro de votre commande : </label>
+        <input type="text" id="idLivraison" name="idLivraison">
+        <input type="submit">
+    </form>
+
+    <% if(livraison !== undefined) { %>
+        <h2>Suivez votre commande numéro : <%= livraison.idLivraison %> </h2>
+        <table>
+            <tr>
+                <th>Date de livraison</th>
+                <th>Date d'arrivée</th>
+            </tr>
+            <tr>
+                <td><%= livraison.dateLivraisonPrevu %>
+                <td><%= livraison.dateArrive %></td>
+            </tr>
+        </table>
+    <% } else { %>
+        <p>Aucune livraison selectionnée.</p>
+    <% } %>
+
+</main>
+
+</body>
+</html>

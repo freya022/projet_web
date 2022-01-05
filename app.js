@@ -6,6 +6,9 @@ const {sequelize} = require('./BDD.js');
 const {client} = require('./bdd/Client')
 const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
+const {livraison} = require("./bdd/Livraison");
+const {articleVelo} = require("./bdd/ArticleVelo")
+const {articlePiece} = require("./bdd/ArticlePiece")
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
@@ -135,21 +138,25 @@ app.post("/try-inscription", async (req, res) => {
 
 app.get("/catalogue", async (req, res) => {
     if (await isLogon(req)) {
-        res.status(200); //Le client est déjà connecté
-        res.contentType("text/plain");
-        res.end("Catalogue"); //TODO utiliser render() pour la page EJS
+        //TODO prendre la table article seulement, pas besoin de articleVelo, articlePiece
+        let articlesVelo = await articleVelo.findAll();
+        let articlesPiece = await articlePiece.findAll();
+
+        res.render("catalogue",{articlePiece: articlesPiece, articleVelo: articlesVelo}); //TODO utiliser render() pour la page EJS
     } else {
         res.redirect("login"); //Demande au client de se connecter
     }
 });
 
-app.get("/reparation", async (req, res) => {
+app.get("/reparations", async (req, res) => {
     if (await isLogon(req)) {
-        res.status(200);
-        res.contentType("text/plain");
-        res.end("Reparation");
+        let reparations = await sequelize.query('select * from reparation join magasin using (idMagasin)', {
+            type: sequelize.QueryTypes.SELECT
+        });
+
+        res.render("Reparations", {reparations: reparations});
     } else {
-        red.redirect("login");
+        res.redirect("login");
     }
 });
 
@@ -160,6 +167,36 @@ app.get("/accueil", async (req, res) => {
         res.render("accueil", {magasins: magasins});
     } else {
         res.redirect("login"); //Demande au client de se connecter
+    }
+});
+
+app.get("/suiviLivraison", async (req, res) => {
+    if (await isLogon(req)) {
+        res.render("suiviLivraison", {livraison: undefined});
+    } else {
+        res.redirect("login");
+    }
+});
+
+app.post("/suiviLivraison", async (req, res) => {
+    if (await isLogon(req)) {
+        if (req.body.idLivraison === undefined) {
+            res.render("suiviLivraison", {livraison: undefined});
+        } else {
+            let livraisonSelect = await livraison.findOne({
+                where: {
+                    idLivraison: req.body.idLivraison
+                }
+            });
+
+            if (livraisonSelect === null) {
+                res.render("suiviLivraison", {livraison: undefined});
+            } else {
+                res.render("suiviLivraison", {livraison: livraisonSelect});
+            }
+        }
+    } else {
+        res.redirect("login");
     }
 });
 

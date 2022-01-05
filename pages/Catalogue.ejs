@@ -1,0 +1,42 @@
+<link href="../public/Catalogue.css" rel="stylesheet">
+<title>Catalogue</title>
+
+<header>
+    <nav class="navBar">
+        <ul>
+            <li><a href="/accueil">Accueil</a></li>
+            <li><a href="/catalogue">Catalogue</a></li>
+            <li><a href="/suiviLivraison">Suivi de Livraison</a></li>
+            <li><a href="/reparations">Réparation</a></li>
+            <li><a href="/localisationMagasin">Vos Magasin</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<ul>
+    <%articlePiece.forEach(function(articlePiece) { %>
+        <li>
+            <strong><%= articlePiece.idArticle %></strong>
+        </li>
+    <% }); %>
+</ul>
+
+<ul>
+    <%articleVelo.forEach(function(articleVelo) { %>
+        <li>
+            <strong><%= articleVelo.idArticle %></strong>
+            typeVelo <%= articleVelo.typeVelo %>, tailleVelo <%= articleVelo.tailleVelo %>, poidsVelo <%= articleVelo.poidsVelo %>
+        </li>
+    <% }); %>
+</ul>
+
+<footer>
+
+    <ul class="ulFooter">
+        <li>Nos Coordonnées:</li>
+        <li>Mail : antoinecaudron8@gmail.com</li>
+        <li>Téléphone : 06-12-57-17-95-24</li>
+        <li>Adresse : Maubeuge, Bd Charles de Gaulle, 59600 Maubeuge</li>
+    </ul>
+</footer>

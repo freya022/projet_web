@@ -81,17 +81,11 @@ app.post("/mettre-au-panier/:idArticle", async (req, res) => {
     }
 });
 
-//TODO tester
-app.post("/valider-commande/:idCommande", async (req, res) => {
+app.post("/valider-commande", async (req, res) => {
     if (await isLogon(req)) {
-        //Pas nécessaire de vérifier la présence du paramètre
-        // Le fait que la propriété soit dans l'URL fait qu'elle est obligatoirement la
-        let idCommande = req.params.idCommande;
-
         let clientConnecte = await getClientConnecte(req);
         let commandeEnCours = await commande.findOne({
             where: {
-                id_commande: idCommande,
                 id_client: clientConnecte.idClient,
                 fini: false
             }
@@ -109,7 +103,7 @@ app.post("/valider-commande/:idCommande", async (req, res) => {
             fini: true
         }, {
             where: {
-                id_commande: idCommande,
+                id_commande: commandeEnCours.id_commande,
                 id_client: clientConnecte.idClient,
                 fini: false
             }
