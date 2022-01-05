@@ -6,8 +6,9 @@ const {sequelize} = require('./BDD.js');
 const {client} = require('./bdd/Client')
 const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
-const {reparation} = require("./bdd/Reparation");
 const {livraison} = require("./bdd/Livraison");
+const {articleVelo} = require("./bdd/ArticleVelo")
+const {articlePiece} = require("./bdd/ArticlePiece")
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
@@ -137,13 +138,11 @@ app.post("/try-inscription", async (req, res) => {
 
 app.get("/catalogue", async (req, res) => {
     if (await isLogon(req)) {
-        let articleVelo = await articleVelo.findAll();
-        let articlePiece = await articlePiece.findAll();
+        //TODO prendre la table article seulement, pas besoin de articleVelo, articlePiece
+        let articlesVelo = await articleVelo.findAll();
+        let articlesPiece = await articlePiece.findAll();
 
-
-        res.render("catalogue",{articlePiece: articlePiece, articleVelo: articleVelo}); //TODO utiliser render() pour la page EJS
-
-
+        res.render("catalogue",{articlePiece: articlesPiece, articleVelo: articlesVelo}); //TODO utiliser render() pour la page EJS
     } else {
         res.redirect("login"); //Demande au client de se connecter
     }
