@@ -1,0 +1,18 @@
+body {
+    height: 100vh;
+    margin: 0;
+}
+
+footer {
+    background: PapayaWhip;
+}
+
+/* Trick */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
