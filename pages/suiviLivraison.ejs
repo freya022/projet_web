@@ -1,27 +1,13 @@
 <!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Suivi livraison</title>
-</head>
+<title>Suivi livraison</title>
 <body>
 
 <!-- En-tête de la page avec le menu de navigation -->
-<header>
-    <nav class="navBar">
-        <ul>
-            <li><a href="/accueil">Accueil</a></li>
-            <li><a href="/catalogue">Catalogue</a></li>
-            <li><a href="/suiviLivraison">Suivi de Livraison</a></li>
-            <li><a href="/reparations">Réparation</a></li>
-            <li><a href="/localisationMagasin">Vos Magasin</a></li>
-        </ul>
-    </nav>
-</header>
 
+<header>
+    <%- include('NavBar') %>
+</header>
 
 <!-- Partie principale de la page qui sert à visualiser le suivi de la livraison -->
 <main>
@@ -52,4 +38,9 @@
 </main>
 
 </body>
+
+<footer>
+    <%- include('Footer') %>
+</footer>
+
 </html>

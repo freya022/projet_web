@@ -1,16 +1,12 @@
-.navBar a{
+footer{
 
-    color: gray;
-    padding: 8px;
-}
-
-.navBar li{
-    display: inline;
-}
-
-.navBar{
-
-    padding-left: 700px ;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: gray;
+    color: white;
+    text-align: left;
+    position: -webkit-sticky;
+    position: sticky;
 
 }
-

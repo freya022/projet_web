@@ -1,25 +1,21 @@
-<link href="../public/Accueil.css" rel="stylesheet">
 <title>Accueil</title>
 
 <header>
-    <nav class="navBar">
-        <ul>
-            <li><a href="/accueil">Accueil</a></li>
-            <li><a href="/catalogue">Catalogue</a></li>
-            <li><a href="/suiviLivraison">Suivi de Livraison</a></li>
-            <li><a href="/reparations">Réparation</a></li>
-            <li><a href="/localisationMagasin">Vos Magasin</a></li>
-        </ul>
-    </nav>
+    <%- include('NavBar') %>
 </header>
 
 <h1> Magasin à proximité</h1>
 
-<% magasins.forEach((magasin) => { %>
+<table>
     <tr>
-        <td><%= magasin.nomMagasin %></td>
+        <td>Nom du magasin</td>
     </tr>
-<% }); %>
+    <% magasins.forEach((magasin) => { %>
+        <tr>
+            <td><%= magasin.nomMagasin %></td>
+        </tr>
+    <% }); %>
+</table>
 
 <h1> Que proposons-nous</h1>
 <ul>
@@ -29,13 +25,7 @@
 </ul>
 
 <footer>
-
-    <ul class="ulFooter">
-        <li>Nos Coordonnées:</li>
-        <li>Mail : antoinecaudron8@gmail.com</li>
-        <li>Téléphone : 06-12-57-17-95-24</li>
-        <li>Adresse : Maubeuge, Bd Charles de Gaulle, 59600 Maubeuge</li>
-    </ul>
+    <%- include('Footer') %>
 </footer>
 
 
