@@ -12,7 +12,7 @@ const {articlePiece} = require("./bdd/ArticlePiece")
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
-        res.redirect("/catalogue");
+        res.redirect("/accueil");
     } else {
         res.render("ChoixConnexion");
     }
@@ -22,7 +22,7 @@ app.get("/login", async (req, res) => {
     //Si on n'est pas connecté, afficher la page de connexion
     //Sinon rediriger vers le catalogue
     if (await isLogon(req)) {
-        res.redirect("/catalogue");
+        res.redirect("/accueil");
     } else {
         res.render("Login");
     }
@@ -32,7 +32,7 @@ app.get("/inscription", async (req, res) => {
     //Si on n'est pas connecté, afficher la page d'inscription
     //Sinon rediriger vers le catalogue
     if (await isLogon(req)) {
-        res.redirect("/catalogue");
+        res.redirect("/accueil");
     } else {
         res.render("Inscription");
     }
@@ -69,10 +69,9 @@ app.get("/commande", async (req, res) => {
             lignesCommande: lignesEnCours
         });
     } else {
-        res.redirect("/login");
+        res.redirect("/");
     }
 });
-
 
 //Le formulaire de connexion redirige ici
 app.post("/try-login", async (req, res) => {
@@ -97,7 +96,7 @@ app.post("/try-login", async (req, res) => {
         res.cookie("nom", nom);
         res.cookie("mdp", mdp);
 
-        res.redirect("/catalogue");
+        res.redirect("/accueil");
     } else {
         res.status(403);
         res.redirect("/login");
@@ -132,7 +131,7 @@ app.post("/try-inscription", async (req, res) => {
         res.cookie("nom", nom);
         res.cookie("mdp", mdp);
 
-        res.redirect("/catalogue");
+        res.redirect("/accueil");
     }
 });
 
@@ -144,7 +143,7 @@ app.get("/catalogue", async (req, res) => {
 
         res.render("catalogue",{articlePiece: articlesPiece, articleVelo: articlesVelo}); //TODO utiliser render() pour la page EJS
     } else {
-        res.redirect("login"); //Demande au client de se connecter
+        res.redirect("/"); //Demande au client de se connecter
     }
 });
 
@@ -156,7 +155,7 @@ app.get("/reparations", async (req, res) => {
 
         res.render("Reparations", {reparations: reparations});
     } else {
-        res.redirect("login");
+        res.redirect("/");
     }
 });
 
@@ -166,7 +165,7 @@ app.get("/accueil", async (req, res) => {
 
         res.render("accueil", {magasins: magasins});
     } else {
-        res.redirect("login"); //Demande au client de se connecter
+        res.redirect("/"); //Demande au client de se connecter
     }
 });
 
@@ -174,7 +173,7 @@ app.get("/suiviLivraison", async (req, res) => {
     if (await isLogon(req)) {
         res.render("suiviLivraison", {livraison: undefined});
     } else {
-        res.redirect("login");
+        res.redirect("/");
     }
 });
 
@@ -196,7 +195,7 @@ app.post("/suiviLivraison", async (req, res) => {
             }
         }
     } else {
-        res.redirect("login");
+        res.redirect("/");
     }
 });
 
