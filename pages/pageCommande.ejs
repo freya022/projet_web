@@ -1,30 +1,13 @@
 <!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Commande</title>
-    <link href="../public/pageCommande.css" rel="stylesheet">
-
-</head>
+<title>Commande</title>
 <body>
 
 <!-- En-tête de la page avec le menu de navigation -->
-<header>
-    <h1>Commande</h1>
-    <nav class="navBar">
-        <ul>
-            <li><a href="/accueil">Accueil</a></li>
-            <li><a href="/catalogue">Catalogue</a></li>
-            <li><a href="/suiviLivraison">Suivi de Livraison</a></li>
-            <li><a href="/reparations">Réparation</a></li>
-            <li><a href="/localisationMagasin">Vos Magasin</a></li>
-        </ul>
-    </nav>
-</header>
 
+<header>
+    <%- include('NavBar') %>
+</header>
 
 <!-- partie principale de la page, sert à visualiser la commande -->
 <main>
@@ -53,13 +36,7 @@
 
 <!-- Bas de la page avec d'autres informations -->
 <footer>
-
-    <ul class="ulFooter">
-        <li>Nos Coordonnées:</li>
-        <li>Mail : antoinecaudron8@gmail.com</li>
-        <li>Téléphone : 06-12-57-17-95-24</li>
-        <li>Adresse : Maubeuge, Bd Charles de Gaulle, 59600 Maubeuge</li>
-    </ul>
+    <%- include('Footer') %>
 </footer>
 
 
