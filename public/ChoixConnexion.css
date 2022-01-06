@@ -12,18 +12,6 @@ body{
 
 }
 
-footer {
-
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: gray;
-    color: white;
-    text-align: left;
-    position: -webkit-sticky;
-    position: sticky;
-}
-
 html{
     background-color: gray;
 }
