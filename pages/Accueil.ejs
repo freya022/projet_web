@@ -4,25 +4,27 @@
     <%- include('NavBar') %>
 </header>
 
-<h1> Magasin à proximité</h1>
+<article>
+    <h1> Magasin à proximité</h1>
 
-<table>
-    <tr>
-        <td>Nom du magasin</td>
-    </tr>
-    <% magasins.forEach((magasin) => { %>
+    <table>
         <tr>
-            <td><%= magasin.nomMagasin %></td>
+            <td>Nom du magasin</td>
         </tr>
-    <% }); %>
-</table>
+        <% magasins.forEach((magasin) => { %>
+            <tr>
+                <td><%= magasin.nomMagasin %></td>
+            </tr>
+        <% }); %>
+    </table>
 
-<h1> Que proposons-nous</h1>
-<ul>
-    <li>Réparation de vos Vélos</li>
-    <li>Catalogue d'équipement ou encore de vélos</li>
-    <li>Vos magasins d'équipement les plus proches</li>
-</ul>
+    <h1> Que proposons-nous</h1>
+    <ul>
+        <li>Réparation de vos Vélos</li>
+        <li>Catalogue d'équipement ou encore de vélos</li>
+        <li>Vos magasins d'équipement les plus proches</li>
+    </ul>
+</article>
 
 <footer>
     <%- include('Footer') %>
