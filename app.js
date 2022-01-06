@@ -219,7 +219,7 @@ function testApi() {
             console.log(error);
         });
 
-    axios.post('http://localhost:8080/valider-commande/2', {}, {
+    axios.post('http://localhost:8080/valider-commande', {}, {
         headers: {
             "Cookie": `nom=nom; mdp=mdp`
         }
@@ -232,4 +232,4 @@ function testApi() {
         });
 }
 
-// testApi();
+testApi();
