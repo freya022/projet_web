@@ -3,6 +3,8 @@ const {getClientConnecte, isLogon} = require("./api.js")
 
 const {sequelize} = require('./BDD.js');
 
+const bcrypt = require('bcrypt');
+
 const {client} = require('./bdd/Client')
 const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
@@ -76,27 +78,33 @@ app.get("/commande", async (req, res) => {
 //Le formulaire de connexion redirige ici
 app.post("/try-login", async (req, res) => {
     if (req.body["nom"] === undefined || req.body["mdp"] === undefined) {
-        res.status(403)
-        res.end()
+        res.status(400);
+        res.end();
 
         return;
     }
 
     let nom = req.body.nom;
-    let mdp = req.body.mdp;
 
     let clientTrouve = await client.findOne({
         where: {
-            "nom": nom,
-            "mdp": mdp
+            "nom": nom
         }
     });
 
     if (clientTrouve != null) {
-        res.cookie("nom", nom);
-        res.cookie("mdp", mdp);
+        let salt = clientTrouve.salt;
+        let mdp = bcrypt.hashSync(req.body.mdp, salt);
 
-        res.redirect("/accueil");
+        if (mdp === clientTrouve.mdp) {
+            res.cookie("nom", nom);
+            res.cookie("mdp", mdp);
+
+            res.redirect("/accueil");
+        } else {
+            res.status(403);
+            res.redirect("/login");
+        }
     } else {
         res.status(403);
         res.redirect("/login");
@@ -112,7 +120,6 @@ app.post("/try-inscription", async (req, res) => {
     }
 
     let nom = req.body.nom;
-    let mdp = req.body.mdp;
 
     let clientTrouve = await client.findOne({
         where: {
@@ -123,10 +130,14 @@ app.post("/try-inscription", async (req, res) => {
     if (clientTrouve != null) {
         res.redirect("/inscription");
     } else {
+        let salt = bcrypt.genSaltSync(10);
+        let mdp = bcrypt.hashSync(req.body.mdp, salt);
+
         await client.create({
             nom: nom,
-            mdp: mdp
-        })
+            mdp: mdp,
+            salt: salt
+        });
 
         res.cookie("nom", nom);
         res.cookie("mdp", mdp);
@@ -231,4 +242,4 @@ function testApi() {
         });
 }
 
-testApi();
+// testApi();
