@@ -1,7 +1,7 @@
-insert into Client (nom, mdp)
-VALUES ('nom', 'mdp');
-insert into Client (nom, mdp)
-VALUES ('client', '123');
+-- insert into Client (nom, mdp)
+-- VALUES ('nom', 'mdp');
+-- insert into Client (nom, mdp)
+-- VALUES ('client', '123');
 
 insert into Magasin (nommagasin, email, telephone, reparation, ville, rue)
 VALUES ('Veloshop', 'veloshop@gmail.com', '26813111585', true, 'Lyon', '12 rue des potiers');
@@ -24,10 +24,10 @@ VALUES ('Un autre vélo', 'categorie 2', 'description 3',
 insert into Reparation (nomreparation, idMagasin, prix, tempsreparation)
 VALUES ('Réparation roue', 1, 15, 1);
 
-insert into Commande (id_client, fini)
-values (1, false);
-insert into lignecommande (idcommande, idarticle, quantite)
-values (1, 1, 5);
+-- insert into Commande (id_client, fini)
+-- values (1, false);
+-- insert into lignecommande (idcommande, idarticle, quantite)
+-- values (1, 1, 5);
 
 insert into livraison (datelivraisonprevu, datearrive)
 VALUES (now(), now() + interval '1 day');

@@ -7,6 +7,7 @@ const client = sequelize.define("Client", {
             autoIncrement: true
         },
         nom: DataTypes.TEXT,
+        salt: DataTypes.TEXT,
         mdp: DataTypes.TEXT
     },
     {
