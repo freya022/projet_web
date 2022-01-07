@@ -1,6 +1,5 @@
 <link href="../public/Catalogue.css" rel="stylesheet">
 <title>Catalogue</title>
-
 <header>
     <%- include('NavBar') %>
 </header>
@@ -25,14 +24,16 @@
         <th>Nom Article</th>
         <th>Categorie</th>
         <th>Prix</th>
+        <th>Description</th>
         <th>Image</th>
     </tr>
 
-    <%article.forEach(function(article) { %>
+    <%articles.forEach(function(article) { %>
     <tr>
         <td><%=article.nomArticle%></td>
         <td><%=article.categorie%></td>
         <td><%=article.prix%></td>
+        <td><%=article.description%></td>
         <td><img src="<% article.lienImage%>>"></td>
         <input type="button"  value="Ajouter">
     </tr>
