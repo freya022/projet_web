@@ -1,28 +1,29 @@
-<link href="../public/Reparation.css" rel="stylesheet">
 <title>Reparation</title>
 
 <header>
     <%- include('NavBar') %>
 </header>
 
-<h1> Reparations disponibles</h1>
+<article>
+    <h1> Reparations disponibles</h1>
 
-<table border="7">
-    <tr>
-        <td>Nom Reparation</td>
-        <td>Nom Magasin</td>
-        <td>Prix</td>
-        <td>Temps Reparation</td>
-    </tr>
-<% reparations.forEach((reparation) => { %>
-    <tr>
-        <td><%= reparation.nomreparation %></td>
-        <td><%= reparation.nommagasin %></td>
-        <td><%= reparation.prix %></td>
-        <td><%= reparation.tempsreparation %></td>
-    </tr>
+    <table>
+        <tr>
+            <td>Nom Reparation</td>
+            <td>Nom Magasin</td>
+            <td>Prix</td>
+            <td>Temps Reparation</td>
+        </tr>
+        <% reparations.forEach((reparation) => { %>
+            <tr>
+                <td><%= reparation.nomreparation %></td>
+                <td><%= reparation.nommagasin %></td>
+                <td><%= reparation.prix %></td>
+                <td><%= reparation.tempsreparation %></td>
+            </tr>
     </table>
-<% }); %>
+    <% }); %>
+</article>
 
 <footer>
     <%- include('Footer') %>
