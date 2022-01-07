@@ -32,8 +32,6 @@ app.post("/mettre-au-panier/:idArticle", async (req, res) => {
         // Le fait que la propriété soit dans l'URL fait qu'elle est obligatoirement la
         let idArticle = req.params.idArticle;
 
-        res.status(200);
-
         let clientConnecte = await getClientConnecte(req);
         let commandeEnCours = await commande.findOne({
             where: {
@@ -74,7 +72,7 @@ app.post("/mettre-au-panier/:idArticle", async (req, res) => {
             });
         }
 
-        res.end();
+        res.redirect("/catalogue");
     } else {
         res.status(403);
         res.end();

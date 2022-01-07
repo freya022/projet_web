@@ -9,8 +9,7 @@ const {client} = require('./bdd/Client')
 const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
 const {livraison} = require("./bdd/Livraison");
-const {articleVelo} = require("./bdd/ArticleVelo")
-const {articlePiece} = require("./bdd/ArticlePiece")
+const {article} = require("./bdd/Article")
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
