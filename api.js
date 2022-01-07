@@ -93,8 +93,6 @@ app.post("/valider-commande", async (req, res) => {
             res.status(404);
 
             return;
-        } else {
-            res.status(200);
         }
 
         await commandeEnCours.update({
@@ -107,7 +105,7 @@ app.post("/valider-commande", async (req, res) => {
             }
         });
 
-        res.end();
+        res.redirect("/catalogue");
     } else {
         res.status(403);
         res.end();

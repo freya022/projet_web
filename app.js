@@ -147,11 +147,29 @@ app.post("/try-inscription", async (req, res) => {
 
 app.get("/catalogue", async (req, res) => {
     if (await isLogon(req)) {
-        //TODO prendre la table article seulement, pas besoin de articleVelo, articlePiece
         let articles = await article.findAll();
+        let articlesPanier = await sequelize.query(`select article.*, quantite
+                                                    from lignecommande
+                                                             join article using (idarticle)
+                                                             join commande on idcommande = id_commande
+                                                    where fini = false
+                                                    order by nomarticle`, {
+            type: sequelize.QueryTypes.SELECT
+        });
 
-        res.render("catalogue",{articles:articles}); //TODO utiliser render() pour la page EJS
+        let prixTotal = await sequelize.query(`select sum(quantite * prix) as prixTotal
+                                                    from lignecommande
+                                                             join article using (idarticle)
+                                                             join commande on idcommande = id_commande
+                                                    where fini = false`, {
+            type: sequelize.QueryTypes.SELECT
+        });
 
+        res.render("catalogue", {
+            articles: articles,
+            articlesPanier: articlesPanier,
+            prixTotal: prixTotal
+        });
     } else {
         res.redirect("/"); //Demande au client de se connecter
     }

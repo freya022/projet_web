@@ -36,6 +36,41 @@
         <% }); %>
         </tbody>
     </table>
+
+    <h1>Votre panier</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <td>Nom Article</td>
+            <td>Categorie</td>
+            <td>Prix</td>
+            <td>Description</td>
+            <td>Image</td>
+            <td>Quantite</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% articlesPanier.forEach(function(article) { %>
+            <tr>
+                <td><%= article.nomarticle %></td>
+                <td><%= article.categorie %></td>
+                <td><%= article.prix %></td>
+                <td><%= article.description %></td>
+                <td><img src="<% article.lienimage %>" alt="Image article"></td>
+                <td><%= article.quantite %></td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+
+    <p>Prix total: <%= prixTotal[0].prixtotal %> €</p>
+
+    <p>
+    <form action="/valider-commande" method="post">
+        <input type="submit" value="Valider le panier"/>
+    </form>
 </article>
 
 <footer>
