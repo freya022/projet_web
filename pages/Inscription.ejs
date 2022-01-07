@@ -1,18 +1,18 @@
-<link href="../public/Inscription.css" rel="stylesheet">
+<article>
+    <form action="/try-inscription" method="post">
+        <!-- Titre, auteur, date, genre, quantité-->
+        <div>
+            <label for="nom">Nom d'utilisateur :</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+        <div>
+            <label for="mdp">Mot de passe :</label>
+            <input type="password" id="mdp" name="mdp" required>
+        </div>
 
-<form action="/try-inscription" method="post">
-    <!-- Titre, auteur, date, genre, quantité-->
-    <div>
-        <label for="nom">Nom d'utilisateur :</label>
-        <input type="text" id="nom" name="nom" required>
-    </div>
-    <div>
-        <label for="mdp">Mot de passe :</label>
-        <input type="password" id="mdp" name="mdp" required>
-    </div>
-
-    <input type="submit" value="S'inscrire"/>
-</form>
+        <input type="submit" value="S'inscrire"/>
+    </form>
+</article>
 
 <footer>
     <%- include('Footer') %>
