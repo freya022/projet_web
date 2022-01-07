@@ -1,8 +1,9 @@
 const {sequelize, DataTypes} = require('./../BDD.js')
 
 const ligneCommande = sequelize.define("LigneCommande", {
-        idCommande: {type: DataTypes.INTEGER, primaryKey: true},
-        idArticle: {type: DataTypes.INTEGER, primaryKey: true},
+        idLigneCommande: {type: DataTypes.INTEGER, autoIncrement:true, primaryKey: true},
+        idCommande: {type: DataTypes.INTEGER},
+        idArticle: {type: DataTypes.INTEGER},
         quantite: DataTypes.INTEGER
     }, {
         tableName: "LigneCommande",

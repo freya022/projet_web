@@ -1,26 +1,42 @@
 <link href="../public/Catalogue.css" rel="stylesheet">
 <title>Catalogue</title>
-
 <header>
     <%- include('NavBar') %>
 </header>
 
-<ul>
-    <%articlePiece.forEach(function(articlePiece) { %>
-        <li>
-            <strong><%= articlePiece.idArticle %></strong>
-        </li>
-    <% }); %>
-</ul>
+<article>
+    <h1>Notre catalogue</h1>
 
-<ul>
-    <%articleVelo.forEach(function(articleVelo) { %>
-        <li>
-            <strong><%= articleVelo.idArticle %></strong>
-            typeVelo <%= articleVelo.typeVelo %>, tailleVelo <%= articleVelo.tailleVelo %>, poidsVelo <%= articleVelo.poidsVelo %>
-        </li>
-    <% }); %>
-</ul>
+    <table>
+        <thead>
+        <tr>
+            <td>Nom Article</td>
+            <td>Categorie</td>
+            <td>Prix</td>
+            <td>Description</td>
+            <td>Image</td>
+            <td>Ajouter au panier</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% articles.forEach(function(article) { %>
+            <tr>
+                <td><%= article.nomArticle %></td>
+                <td><%= article.categorie %></td>
+                <td><%= article.prix %></td>
+                <td><%= article.description %></td>
+                <td><img src="<% article.lienImage %>" alt="Image article"></td>
+                <td>
+                    <form method="post" action="/mettre-au-panier/<%= article.idArticle %>">
+                        <input type="submit" value="Ajouter">
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</article>
 
 <footer>
     <%- include('Footer') %>

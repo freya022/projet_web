@@ -9,8 +9,7 @@ const {client} = require('./bdd/Client')
 const {commande} = require('./bdd/Commande')
 const {magasin} = require('./bdd/Magasin')
 const {livraison} = require("./bdd/Livraison");
-const {articleVelo} = require("./bdd/ArticleVelo")
-const {articlePiece} = require("./bdd/ArticlePiece")
+const {article} = require("./bdd/Article")
 
 app.get("/", async (req, res) => {
     if (await isLogon(req)) {
@@ -149,10 +148,10 @@ app.post("/try-inscription", async (req, res) => {
 app.get("/catalogue", async (req, res) => {
     if (await isLogon(req)) {
         //TODO prendre la table article seulement, pas besoin de articleVelo, articlePiece
-        let articlesVelo = await articleVelo.findAll();
-        let articlesPiece = await articlePiece.findAll();
+        let articles = await article.findAll();
 
-        res.render("catalogue",{articlePiece: articlesPiece, articleVelo: articlesVelo}); //TODO utiliser render() pour la page EJS
+        res.render("catalogue",{articles:articles}); //TODO utiliser render() pour la page EJS
+
     } else {
         res.redirect("/"); //Demande au client de se connecter
     }
